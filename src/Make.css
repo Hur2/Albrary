@@ -1,0 +1,152 @@
+/*책 만들기*/
+
+/* 배경과 요소 z-index 관리 */
+.circle-wrapper {
+  z-index: -1;
+}
+
+.text-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* 배경 */
+.circle {
+  position: absolute;
+  background-color: rgb(255, 241, 215);
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 1s ease-in-out, height 1s ease-in-out;
+  overflow: hidden;
+}
+
+.buttonESC {
+  position: absolute;
+  left: 20%;
+  background-color: transparent;
+  border: 1px solid red;
+  cursor: pointer;
+}
+
+.buttonESC img {
+  width: 100px;
+  height: auto;
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.75s ease-in-out; /* 페이드인 애니메이션 적용 */
+}
+
+.fade-out {
+  animation: fadeOut 0.75s ease-in-out forwards; /* 페이드인 애니메이션 적용 */
+}
+
+/*만들기 */
+.make-container {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.intro-text {
+  margin-top: 25%;
+  text-align: center;
+  font-family: "NanumBarunGothic";
+  font-size: 64px;
+  font-style: bold;
+}
+
+/* 프로그레스 바 스타일 */
+.progress-bar {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 18px;
+  background-color: gainsboro;
+}
+
+.progress {
+  height: 20px;
+  background-color: #ffa41c; /* 프로그레스 바 색상 */
+  width: 0; /* 초기 너비 0으로 설정 */
+  transition: width 0.5s; /* 너비 변경 애니메이션 설정 */
+}
+
+/* 스토리 스타일 */
+.story-container {
+  margin-left: 75px;
+  width: 1000px;
+  height: auto;
+  margin-top: 25px;
+
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: rgb(248, 238, 193);
+  font-size: 28px;
+
+  text-align: left;
+  font-family: "NanumBarunGothic";
+  line-height: 1.5;
+  white-space: pre-wrap; /*개행문자 출력용*/
+}
+
+/* 질문 스타일 */
+.question {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-family: "NanumBarunGothic";
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font-size: 32px;
+  font-family: "NanumBarunGothic";
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button.selected {
+  background-color: #28a745;
+}
+
+button.selected:hover {
+  background-color: #1a9917;
+}

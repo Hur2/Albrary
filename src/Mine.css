@@ -1,0 +1,35 @@
+/* 나만의책장 */
+.mine-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.book-container {
+  width: 250px;
+  margin: 16px;
+  background-color: aliceblue;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.book-container img {
+  max-width: 100%;
+  margin-left: 7.5%;
+  margin-top: 4px;
+}
+
+.book-info {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+}
+
+.book-info h3 {
+  font-family: "NanumSquareRound";
+  margin: 0;
+}
+
+.book-info span {
+  margin-left: 3px;
+}
