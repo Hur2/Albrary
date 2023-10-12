@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { questionData, storyData } from "./Make_data";
 
 export default function TextCreator({ onPhaseChange }) {
   const [textPhase, setTextPhase] = useState(0);
@@ -104,30 +103,46 @@ function MakeBaseText({ onComplete }) {
 }
 
 function MakeText({ onPhaseChange }) {
-  // 스토리 생성
+  const [questionData, setQuestionData] = useState(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
 
-  const currentQuestion = questionData[currentQuestionIndex];
+  useEffect(() => {
+    async function fetchQuestionData() {
+      try {
+        const response = await fetch("Make_data.json");
+        if (!response.ok) {
+          throw new Error("Failed to fetch question data");
+        }
+        const data = await response.json();
+        setQuestionData(data.questionData);
+      } catch (error) {
+        console.error("Error fetching question data:", error);
+      }
+    }
 
-  const totalQuestions = questionData.length; // 총 질문 개수
+    fetchQuestionData();
+  }, []);
+
+  const currentQuestion = questionData && questionData[currentQuestionIndex];
+
+  const totalQuestions = questionData ? questionData.length : 0;
 
   const handleAnswerClick = (answer) => {
     // 다음 질문으로 이동
-    // 개발 사항 : answer 을 GPT API 에 전달
+    // 개발 사항: answer을 GPT API에 전달
     const nextQuestionIndex = currentQuestionIndex + 1;
 
-    if (nextQuestionIndex < questionData.length) {
+    if (nextQuestionIndex < totalQuestions) {
       setCurrentQuestionIndex(nextQuestionIndex);
     } else {
-      /* 질문 종료 -> 그림 선택 페이즈로 넘어가기*/
+      // 질문 종료 -> 그림 선택 페이즈로 넘어가기
       onPhaseChange(3);
     }
 
     setSelectedAnswer("");
   };
 
-  // 진행도 계산
   const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
 
   return (
@@ -139,20 +154,20 @@ function MakeText({ onPhaseChange }) {
         <div className="progress-bar">
           <div className="progress" style={{ width: `${progress}%` }}></div>
         </div>
-        <div className="story-container">{storyData}</div>
         <div className="question">
-          <p>{currentQuestion.question}</p>
+          {currentQuestion ? <p>{currentQuestion.question}</p> : null}
         </div>
         <div className="options">
-          {currentQuestion.options.map((option, index) => (
-            <button
-              key={index}
-              onClick={() => handleAnswerClick(option)}
-              className={selectedAnswer === option ? "selected" : ""}
-            >
-              {option}
-            </button>
-          ))}
+          {currentQuestion &&
+            currentQuestion.options.map((option, index) => (
+              <button
+                key={index}
+                onClick={() => handleAnswerClick(option)}
+                className={selectedAnswer === option ? "selected" : ""}
+              >
+                {option}
+              </button>
+            ))}
         </div>
       </div>
     </div>

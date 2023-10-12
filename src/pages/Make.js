@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./Make.css";
-import introduceImage from "./make_front.png";
-import BackButtonImage from "./make_button_back.png";
-import TextCreator from "./components/textCreator";
-import ImageCreator from "./components/imageCreator";
+import "../styles/Make.css";
+import TextCreator from "../components/textCreator";
+import ImageCreator from "../components/imageCreator";
 
 function Make() {
   const [phase, setPhase] = useState(0); // 현재 책 만들기 단계, 0 : 프론트 1/2/3 : 배경 2 : 텍스트 3: 그림
@@ -38,7 +36,11 @@ function MakeFrontCreator({ onPhaseChange }) {
 
   return (
     <div>
-      <img src={introduceImage} alt="frontimage" onClick={handleImageClick} />
+      <img
+        src="img/make_front.png"
+        alt="frontimage"
+        onClick={handleImageClick}
+      />
     </div>
   );
 }
@@ -98,7 +100,7 @@ function MakeCircle() {
       {(isCircleVisible && timing) === true && (
         <div className="fade-in">
           <div className="buttonESC" onClick={handleButtonClick}>
-            <img src={BackButtonImage} alt="backbutton" />
+            <img src="img/make_button_back.png" alt="backbutton" />
           </div>
         </div>
       )}

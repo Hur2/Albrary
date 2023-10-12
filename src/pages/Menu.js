@@ -1,10 +1,5 @@
 import React from "react";
-import logo from "./logo_aibrary.png";
-import menu_line from "./menu_line.png";
-import menu_polygon from "./menu_polygon.png";
 import { Link, useLocation } from "react-router-dom";
-
-import "./App.css";
 
 function Menu(props) {
   return (
@@ -12,7 +7,7 @@ function Menu(props) {
       <div class="menu-background">
         <div className="logo">
           <Link to="/">
-            <img src={logo} alt="logo" width="250" />
+            <img src="img/logo_aibrary.png" alt="logo" width="250" />
           </Link>
         </div>
         <MenuText />
@@ -34,10 +29,14 @@ function MenuText() {
           책 만들기
         </Link>
         {location.pathname === "/Make" && (
-          <img className="menu-polygon" src={menu_polygon} alt="menu polygon" />
+          <img
+            className="menu-polygon"
+            src="img/menu_polygon.png"
+            alt="menu polygon"
+          />
         )}
       </div>
-      <img className="menu-line" src={menu_line} alt="menu line" />
+      <img className="menu-line" src="img/menu_line.png" alt="menu line" />
       <div className="menu-item">
         <Link
           to="/Mine"
@@ -46,10 +45,14 @@ function MenuText() {
           나만의 책장
         </Link>
         {location.pathname === "/Mine" && (
-          <img className="menu-polygon" src={menu_polygon} alt="menu polygon" />
+          <img
+            className="menu-polygon"
+            src="img/menu_polygon.png"
+            alt="menu polygon"
+          />
         )}
       </div>
-      <img className="menu-line" src={menu_line} alt="menu line" />
+      <img className="menu-line" src="img/menu_line.png" alt="menu line" />
       <div className="menu-item">
         <Link
           to="/Everyone"
@@ -58,7 +61,11 @@ function MenuText() {
           모두의 책장
         </Link>
         {location.pathname === "/Everyone" && (
-          <img className="menu-polygon" src={menu_polygon} alt="menu polygon" />
+          <img
+            className="menu-polygon"
+            src="img/menu_polygon.png"
+            alt="menu polygon"
+          />
         )}
       </div>
     </div>
