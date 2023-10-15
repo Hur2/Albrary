@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Intro, IntroQuestion } from "./textCreator_sentence";
 
 export default function TextCreator({ onPhaseChange }) {
   const [textPhase, setTextPhase] = useState(0);
@@ -14,7 +15,7 @@ export default function TextCreator({ onPhaseChange }) {
   useEffect(() => {
     setTimeout(() => {
       setTextPhase(2);
-    }, 5000);
+    }, 9000);
   }, []);
 
   return (
@@ -24,44 +25,37 @@ export default function TextCreator({ onPhaseChange }) {
         <MakeBaseText onComplete={setBaseComplete} />
       ) : null}
       {textPhase === 2 && baseComplete === 1 ? (
+        <IntroQuestion onComplete={setBaseComplete} />
+      ) : null}
+      {textPhase === 2 && baseComplete === 2 ? (
         <MakeText onPhaseChange={onPhaseChange} />
       ) : null}
     </div>
   );
 }
 
-function Intro() {
-  const [nowFadeState, setFadeState] = useState(0);
-
-  useEffect(() => {
-    const timeOut = setTimeout(() => {
-      setFadeState(1);
-    }, 2500);
-
-    return () => {
-      clearTimeout(timeOut);
-    };
-  }, []);
-
-  return (
-    <div className={`fade-in ${nowFadeState ? "fade-out" : ""}`}>
-      <div className="make-container">
-        <div className="intro-text">지금부터 책을 만들어 볼까요?</div>
-      </div>
-    </div>
-  );
-}
-
 function MakeBaseText({ onComplete }) {
   // 기초 질문 생성
+  const [baseQuestions, setBaseQuestions] = useState([]);
 
-  const baseQuestions = [
-    "주인공의 이름은?",
-    "주인공의 성별은?",
-    "주인공의 나이는?",
-    "주인공이 가장 좋아하는 것은?",
-    "주인공이 가장 싫어하는 것은?",
-  ];
+  //fetch로 JSON 갖고오기
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("base_data.json");
+        if (!response.ok) {
+          throw new Error("Failed to fetch base data");
+        }
+
+        const data = await response.json();
+        setBaseQuestions(data.baseQuestions);
+      } catch (error) {
+        console.error("Error fetching base data:", error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const [baseAnswers, setBaseAnswers] = useState(
     Array(baseQuestions.length).fill("")
@@ -75,7 +69,6 @@ function MakeBaseText({ onComplete }) {
 
   const handleSubmit = () => {
     //답변 처리
-
     console.log("기본답변:", baseAnswers);
 
     onComplete(1); // base 질문 답 완료
@@ -84,14 +77,17 @@ function MakeBaseText({ onComplete }) {
   return (
     <div className="fade-in">
       <div className="make-container">
+        <div className="text-title">1단계 : 이야기 구상하기</div>
         <form onSubmit={handleSubmit}>
           {baseQuestions.map((question, index) => (
             <div key={index}>
-              <label>{question}</label>
+              <label className="baseQuestion_q">{question}</label>
+              <div></div>
               <input
                 type="text"
                 value={baseAnswers[index]}
                 onChange={(event) => handleAnswerChange(index, event)}
+                className="baseQuestion_a"
               />
             </div>
           ))}
@@ -148,9 +144,7 @@ function MakeText({ onPhaseChange }) {
   return (
     <div className="fade-in">
       <div className="make-container">
-        <div className="text-title">
-          <h1>1단계 . 글짓기</h1>
-        </div>
+        <div className="text-title">2단계 : 글짓기</div>
         <div className="progress-bar">
           <div className="progress" style={{ width: `${progress}%` }}></div>
         </div>

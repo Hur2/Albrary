@@ -1,0 +1,19 @@
+{
+  "part": [
+    {
+      "id": 1,
+      "src": "img/per1.png"
+    },
+    {
+      "id": 2,
+      "src": "img/per2.png"
+    },
+    {
+      "id": 3,
+      "src": "img/per3.png"
+    }
+  ],
+  "back": {
+    "src": "img/back.png"
+  }
+}

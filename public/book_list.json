@@ -1,14 +1,17 @@
 {
   "mineBook": [
     {
+      "id": "1",
       "coverPath": "img/test.png",
       "title": "곰한마리"
     },
     {
+      "id": "2",
       "coverPath": "img/test.png",
       "title": "곰한마리"
     },
     {
+      "id": "3",
       "coverPath": "img/test.png",
       "title": "곰한마리"
     },

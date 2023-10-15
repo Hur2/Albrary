@@ -24,10 +24,11 @@
 
 .buttonESC {
   position: absolute;
-  left: 20%;
+  left: 100px;
+  top: 50px;
   background-color: transparent;
-  border: 1px solid red;
   cursor: pointer;
+  z-index: 99;
 }
 
 .buttonESC img {
@@ -65,60 +66,70 @@
 /*만들기 */
 .make-container {
   text-align: center;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  margin-top: 50px;
-  padding: 20px;
 }
 
 .intro-text {
-  margin-top: 25%;
   text-align: center;
-  font-family: "NanumBarunGothic";
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 800;
   font-size: 64px;
-  font-style: bold;
+  white-space: nowrap;
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.baseQuestion_q {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+}
+
+.baseQuestion_a {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  width: 1000px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  text-align: center;
+  border: 3px solid rgb(187, 187, 187);
+  border-radius: 7px;
+  background-color: rgb(247, 247, 247);
 }
 
 /* 프로그레스 바 스타일 */
 .progress-bar {
-  margin-top: 10px;
+  margin-top: 40px;
   text-align: center;
   font-size: 18px;
-  background-color: gainsboro;
+  background-color: #a69f93;
 }
 
 .progress {
   height: 20px;
-  background-color: #ffa41c; /* 프로그레스 바 색상 */
+  background-color: #eeb414; /* 프로그레스 바 색상 */
   width: 0; /* 초기 너비 0으로 설정 */
   transition: width 0.5s; /* 너비 변경 애니메이션 설정 */
 }
 
-/* 스토리 스타일 */
-.story-container {
-  margin-left: 75px;
-  width: 1000px;
-  height: auto;
-  margin-top: 25px;
-
-  padding: 20px;
-  border: 1px solid black;
-  border-radius: 10px;
-  background-color: rgb(248, 238, 193);
-  font-size: 28px;
-
-  text-align: left;
-  font-family: "NanumBarunGothic";
-  line-height: 1.5;
-  white-space: pre-wrap; /*개행문자 출력용*/
+/* 질문 스타일 */
+.text-title {
+  font-size: 56px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 800;
+  margin-bottom: 30px;
 }
 
-/* 질문 스타일 */
 .question {
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 36px;
   margin-bottom: 20px;
-  font-family: "NanumBarunGothic";
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
 }
 
 .options {
@@ -128,25 +139,90 @@
 
 button {
   font-size: 32px;
-  font-family: "NanumBarunGothic";
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
   padding: 10px;
   margin: 5px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  background-color: #3498db;
+  background-color: #a4846b;
   color: white;
   transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #856751;
 }
 
-button.selected {
-  background-color: #28a745;
+/* 그림 제작 */
+.image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
 }
 
-button.selected:hover {
-  background-color: #1a9917;
+.part-base-container {
+  width: 1000px;
+  height: 160px;
+  border: 10px solid #856751;
+  border-radius: 20px;
+  background-color: #a4846b;
+  position: relative;
+  z-index: 3;
+}
+
+.BackBox {
+  margin-top: 20px;
+  width: 512px;
+}
+.BackBox img {
+  width: 100%;
+  height: auto;
+}
+
+.partBox {
+  z-index: 4;
+}
+
+.image-btn-placing {
+  position: absolute;
+  top: 260px;
+  left: 1000px;
+  z-index: 3;
+  font-size: 32px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+
+  background-color: #5090c5;
+}
+
+.image-btn-placing:hover {
+  background-color: #366083;
+}
+
+.image-btn-resizing {
+  position: absolute;
+  top: 260px;
+  left: 1200px;
+  z-index: 3;
+  font-size: 32px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+
+  background-color: #67c550;
+}
+
+.image-btn-resizing:hover {
+  background-color: #4d8f3c;
+}
+
+.image-btn {
+  position: absolute;
+  top: 700px;
+  z-index: 3;
+  font-size: 32px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
 }

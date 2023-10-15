@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import Book from "../components/book";
 import "../styles/Mine.css";
 
@@ -8,7 +9,7 @@ function Mine() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("bookdummy.json");
+        const response = await fetch("book_list.json");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
@@ -30,7 +31,12 @@ function Mine() {
     <div className="mine-container">
       {mineBookData.mineBook.map((book, index) => {
         return (
-          <Book title={book.title} coverPath={book.coverPath} key={index} />
+          <Book
+            title={book.title}
+            coverPath={book.coverPath}
+            key={index}
+            id={book.id}
+          />
         );
       })}
     </div>
