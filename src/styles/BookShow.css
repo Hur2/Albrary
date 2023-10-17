@@ -1,0 +1,155 @@
+.currentPage {
+  position: absolute;
+  left: calc(50% - 256px);
+  transform: translateX(-50%);
+  top: 180px;
+  width: 512px;
+  height: 512px;
+  border: 2px solid black;
+
+  font-size: 28px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+}
+
+.currentPage p {
+  margin: 20px;
+}
+
+.currentPage img {
+  width: 100%;
+  height: 100%;
+}
+
+.nextPage {
+  position: absolute;
+  left: calc(50% + 256px);
+  transform: translateX(-50%);
+  top: 180px;
+  width: 512px;
+  height: 512px;
+  border: 2px solid black;
+  font-size: 28px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+}
+
+.nextPage p {
+  margin: 20px;
+}
+
+.nextPage img {
+  width: 100%;
+  height: 100%;
+}
+
+.btn-prev {
+  position: absolute;
+  left: calc(50% - 90px);
+  transform: translateX(-50%);
+  top: 720px;
+  font-size: 32px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  width: 120px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #a4846b;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-prev:hover {
+  background-color: #856751;
+}
+
+.btn-next {
+  position: absolute;
+  left: calc(50% + 90px);
+  transform: translateX(-50%);
+  top: 720px;
+  font-size: 32px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  width: 120px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #a4846b;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-next:hover {
+  background-color: #856751;
+}
+
+.btn-superPrev {
+  position: absolute;
+  left: calc(50% - 220px);
+  transform: translateX(-50%);
+  top: 720px;
+  font-size: 32px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  width: 120px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #a4846b;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-superPrev:hover {
+  background-color: #856751;
+}
+
+.btn-superNext {
+  position: absolute;
+  left: calc(50% + 220px);
+  transform: translateX(-50%);
+  top: 720px;
+  font-size: 32px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  width: 120px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #a4846b;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-superNext:hover {
+  background-color: #856751;
+}
+
+/* 프로그레스 바 스타일 */
+.progress-bar {
+  position: absolute;
+  left: 50%;
+  top: 100px;
+  transform: translateX(-50%);
+  width: 1024px;
+  text-align: center;
+  font-size: 18px;
+  background-color: #a69f93;
+}
+
+.progress {
+  height: 20px;
+  background-color: #eeb414; /* 프로그레스 바 색상 */
+  width: 0; /* 초기 너비 0으로 설정 */
+  transition: width 0.5s; /* 너비 변경 애니메이션 설정 */
+}

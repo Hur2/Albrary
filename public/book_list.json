@@ -3,13 +3,13 @@
     {
       "id": "1",
       "coverPath": "img/cover.png",
-      "title": "곰한마리두마리세마리네마리",
+      "title": "곰한마리두마리세마리(짝수테스트)",
       "author": "이름이정말정말긴작가"
     },
     {
       "id": "2",
       "coverPath": "img/cover.png",
-      "title": "곰한마리두마리",
+      "title": "곰한마리두마리(홀수테스트)",
       "author": "이름이긴작가"
     },
     {

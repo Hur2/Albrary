@@ -7,7 +7,7 @@ function Menu(props) {
       <div class="menu-background">
         <div className="logo">
           <Link to="/">
-            <img src="img/logo_aibrary.png" alt="logo" width="250" />
+            <img src="/img/logo_aibrary.png" alt="logo" width="250" />
           </Link>
         </div>
         <MenuText />
@@ -31,12 +31,12 @@ function MenuText() {
         {location.pathname === "/Make" && (
           <img
             className="menu-polygon"
-            src="img/menu_polygon.png"
+            src="/img/menu_polygon.png"
             alt="menu polygon"
           />
         )}
       </div>
-      <img className="menu-line" src="img/menu_line.png" alt="menu line" />
+      <img className="menu-line" src="/img/menu_line.png" alt="menu line" />
       <div className="menu-item">
         <Link
           to="/Mine"
@@ -47,12 +47,12 @@ function MenuText() {
         {location.pathname === "/Mine" && (
           <img
             className="menu-polygon"
-            src="img/menu_polygon.png"
+            src="/img/menu_polygon.png"
             alt="menu polygon"
           />
         )}
       </div>
-      <img className="menu-line" src="img/menu_line.png" alt="menu line" />
+      <img className="menu-line" src="/img/menu_line.png" alt="menu line" />
       <div className="menu-item">
         <Link
           to="/Everyone"
@@ -63,7 +63,7 @@ function MenuText() {
         {location.pathname === "/Everyone" && (
           <img
             className="menu-polygon"
-            src="img/menu_polygon.png"
+            src="/img/menu_polygon.png"
             alt="menu polygon"
           />
         )}
