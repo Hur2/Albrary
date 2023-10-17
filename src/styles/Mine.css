@@ -7,29 +7,65 @@
 
 .book-container {
   width: 250px;
-  margin: 16px;
-  background-color: aliceblue;
-  border-radius: 5px;
-  border: 1px solid black;
+  margin: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
 }
 
 .book-container img {
-  max-width: 100%;
-  margin-left: 7.5%;
-  margin-top: 4px;
+  width: 230px;
+  height: auto;
+  display: block;
+  transition: 0.25s;
+  border: 3px solid #2e241d;
+  border-radius: 20px;
+  box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.2);
+  filter: brightness(1);
 }
 
-.book-info {
-  display: flex;
-  padding: 20px;
-  align-items: center;
+.book-container:hover img {
+  filter: brightness(0.7); /* 이미지의 brightness를 복원 */
 }
 
-.book-info h3 {
-  font-family: "NanumSquareRound";
-  margin: 0;
+.book-container h3 {
+  position: absolute;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  text-align: center;
+  width: 230px;
+  top: -25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: 0.25s;
+  color: white;
+  padding: 10px;
 }
 
-.book-info span {
-  margin-left: 3px;
+.book-container:hover h3 {
+  opacity: 1;
+  top: 25%;
+}
+
+.book-container h4 {
+  position: absolute;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  text-align: right;
+  width: 230px;
+  top: 125%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: 0.25s;
+  color: lightgray;
+  padding: 10px;
+}
+
+.book-container:hover h4 {
+  opacity: 1;
+  top: 70%;
 }

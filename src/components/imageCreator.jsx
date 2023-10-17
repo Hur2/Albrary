@@ -12,7 +12,7 @@ export default function ImageCreator() {
   }, []);
 
   return (
-    <div className="image-wrapper">
+    <div>
       {imagePhase === 0 ? <Intro /> : null}
       {imagePhase === 1 ? <MakeImage /> : null}
     </div>

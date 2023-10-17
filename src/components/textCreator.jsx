@@ -91,7 +91,9 @@ function MakeBaseText({ onComplete }) {
               />
             </div>
           ))}
-          <button type="submit">제출하기</button>
+          <button className="button-normal" type="submit">
+            제출하기
+          </button>
         </form>
       </div>
     </div>
@@ -157,7 +159,7 @@ function MakeText({ onPhaseChange }) {
               <button
                 key={index}
                 onClick={() => handleAnswerClick(option)}
-                className={selectedAnswer === option ? "selected" : ""}
+                className="button-normal"
               >
                 {option}
               </button>

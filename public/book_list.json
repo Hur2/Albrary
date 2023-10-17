@@ -2,78 +2,96 @@
   "mineBook": [
     {
       "id": "1",
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리두마리세마리네마리",
+      "author": "이름이정말정말긴작가"
     },
     {
       "id": "2",
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리두마리",
+      "author": "이름이긴작가"
     },
     {
       "id": "3",
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     },
     {
-      "coverPath": "img/test.png",
-      "title": "곰한마리"
+      "coverPath": "img/cover.png",
+      "title": "곰한마리",
+      "author": "작가"
     }
   ]
 }

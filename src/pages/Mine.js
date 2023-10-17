@@ -34,6 +34,7 @@ function Mine() {
           <Book
             title={book.title}
             coverPath={book.coverPath}
+            author={book.author}
             key={index}
             id={book.id}
           />

@@ -137,7 +137,7 @@
   flex-direction: column;
 }
 
-button {
+.button-normal {
   font-size: 32px;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 500;
@@ -151,16 +151,8 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
+.button-normal:hover {
   background-color: #856751;
-}
-
-/* 그림 제작 */
-.image-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
 }
 
 .part-base-container {
@@ -169,60 +161,50 @@ button:hover {
   border: 10px solid #856751;
   border-radius: 20px;
   background-color: #a4846b;
-  position: relative;
+  position: absolute;
+  left: 200px;
+  top: 70px;
   z-index: 3;
+}
+
+.image-wrapper {
+  position: absolute;
+  left: 10%;
 }
 
 .BackBox {
-  margin-top: 20px;
-  width: 512px;
-}
-.BackBox img {
-  width: 100%;
-  height: auto;
-}
-
-.partBox {
-  z-index: 4;
-}
-
-.image-btn-placing {
   position: absolute;
-  top: 260px;
-  left: 1000px;
+  left: 200;
+  top: 300;
+  z-index: 3;
+}
+
+.PartBox {
+  position: absolute;
+  left: 0;
+  top: 200;
+  z-index: 5;
+}
+
+.image-btn-submit {
+  position: absolute;
+  left: 750px;
+  top: 720px;
   z-index: 3;
   font-size: 32px;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 500;
-
-  background-color: #5090c5;
+  width: 160px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #a4846b;
+  color: white;
+  transition: background-color 0.3s;
 }
 
-.image-btn-placing:hover {
-  background-color: #366083;
-}
-
-.image-btn-resizing {
-  position: absolute;
-  top: 260px;
-  left: 1200px;
-  z-index: 3;
-  font-size: 32px;
-  font-family: "Noto Sans KR", sans-serif;
-  font-weight: 500;
-
-  background-color: #67c550;
-}
-
-.image-btn-resizing:hover {
-  background-color: #4d8f3c;
-}
-
-.image-btn {
-  position: absolute;
-  top: 700px;
-  z-index: 3;
-  font-size: 32px;
-  font-family: "Noto Sans KR", sans-serif;
-  font-weight: 500;
+.image-btn-submit:hover {
+  background-color: #856751;
 }

@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
 
+let firstClickX = 0; // part 처음 클릭 시 x 좌표 (part 좌상단 기준)
+let firstClickY = 0; // part 처음 클릭 시 y 좌표 (part 좌상단 기준)
+let partSize = 126;
+let backgroundLeft = 200; // background left
+let backgroundTop = 280; // background top
+let partBoxContainerLeft = 200;
+let partBoxContainerTop = 70;
+let backgroundSize = 512;
+
 function MakeImage() {
   const [parts, setParts] = useState([]);
 
@@ -16,8 +25,8 @@ function MakeImage() {
         //left top 값 주기
         const updatedParts = data.part.map((part) => ({
           ...part,
-          top: 0,
-          left: part.id * 200,
+          top: 95,
+          left: 200 + part.id * 150,
         }));
 
         setParts(updatedParts);
@@ -29,129 +38,123 @@ function MakeImage() {
     fetchData();
   }, []);
 
-  const handleDragStart = (e, id) => {
-    e.dataTransfer.setData("text/plain", id);
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const id = e.dataTransfer.getData("text/plain");
-    const part = parts.find((p) => p.id === parseInt(id, 10));
-    if (part) {
-      // Check if the drop occurred inside the BackBox
-      const backBox = document.querySelector(".BackBox");
-      const rect = backBox.getBoundingClientRect();
-
-      if (
-        e.clientX >= rect.left &&
-        e.clientX + 126 <= rect.right &&
-        e.clientY >= rect.top &&
-        e.clientY + 126 <= rect.bottom
-      ) {
-        const updatedParts = parts.map((p) =>
-          p.id === part.id
-            ? {
-                ...p,
-                top: e.clientY - document.querySelector(".header").clientHeight,
-                left: e.clientX - rect.left,
-              }
-            : p
-        );
-        setParts(updatedParts);
-      }
-    }
-  };
-
   return (
-    <div className="image-container">
-      <div className="part-base-container">
-        {parts.map((part) => (
-          <PartBox
-            className="partBox"
-            key={part.id}
-            part={part}
-            onDragStart={(e) => handleDragStart(e, part.id)}
-          />
-        ))}
-      </div>
+    <div className="image-wrapper">
       <div
-        className="BackBox"
-        onDragOver={(e) => e.preventDefault()}
+        className="part-base-container"
+        style={{ left: partBoxContainerLeft, top: partBoxContainerTop }}
+      />
+      {parts.map((part) => (
+        <PartBox className="PartBox" key={part.id} part={part} />
+      ))}
+      <BackBox
+        image="img/back.png"
         onDrop={handleDrop}
-        style={{ display: "inline-block" }}
-      >
-        <BackBox image="img/back.png" />
-      </div>
-      <button className="image-btn-placing">위치정하기</button>
-      <button className="image-btn-resizing">크기정하기</button>
-      <button className="image-btn">제출하기</button>
+        onDragOver={allowDrop}
+      />
+
+      <button className="image-btn-submit">제출하기</button>
     </div>
   );
 }
 
-function PartBox({ part, onDragStart }) {
-  const [offsetX, setOffsetX] = useState(0);
-  const [offsetY, setOffsetY] = useState(0);
-  const [startX, setStartX] = useState(part.left);
-  const [startY, setStartY] = useState(part.top);
+function PartBox({ part }) {
+  let originalLeft = 0;
+  let originalTop = 0;
 
   const handleDragStart = (e) => {
-    const boundingBox = e.currentTarget.getBoundingClientRect();
-    setOffsetX(e.clientX - boundingBox.left - boundingBox.width / 2);
-    setOffsetY(e.clientY - boundingBox.top - boundingBox.height / 2);
-    setStartX(part.left);
-    setStartY(part.top);
-    onDragStart(e);
+    firstClickX = e.clientX - e.target.offsetLeft;
+    firstClickY = e.clientY - e.target.offsetTop;
+    originalLeft = e.target.style.left;
+    originalTop = e.target.style.top;
+    e.target.style.zIndex = "3";
   };
 
-  const handleDrag = (e) => {
-    const boundingBox = e.currentTarget.getBoundingClientRect();
-    const newX = e.clientX - offsetX;
-    const newY = e.clientY - offsetY;
+  const dragHandler = (e) => {
+    e.target.style.position = "absolute";
+    e.target.style.left = `${e.clientX - firstClickX}px`;
+    e.target.style.top = `${e.clientY - firstClickY}px`;
+  };
 
-    const backBox = document.querySelector(".BackBox");
-    const backBoxRect = backBox.getBoundingClientRect();
+  const onDragOver = (e) => {
+    e.preventDefault();
+  };
 
-    if (
-      newX >= backBoxRect.left &&
-      newX + boundingBox.width <= backBoxRect.right &&
-      newY >= backBoxRect.top &&
-      newY + boundingBox.height <= backBoxRect.bottom
-    ) {
-      part.left = newX;
-      part.top = newY;
-    } else {
-      part.left = startX;
-      part.top = startY;
+  const dragEndHandler = (e) => {
+    e.target.style.position = "absolute";
+    e.target.style.zIndex = "4";
+
+    if (e.clientX - firstClickX < backgroundLeft) {
+      e.target.style.left = backgroundLeft + "px";
     }
+
+    if (e.clientX - firstClickX + partSize > backgroundLeft + backgroundSize) {
+      e.target.style.left = backgroundLeft + backgroundSize - partSize + "px";
+    }
+
+    if (e.clientY - firstClickY < backgroundTop) {
+      e.target.style.top = backgroundTop + "px";
+    }
+
+    if (e.clientY - firstClickY + partSize > backgroundTop + backgroundSize) {
+      e.target.style.top = backgroundTop + backgroundSize - partSize + "px";
+    }
+  };
+
+  const dragLeaveHandler = (e) => {
+    e.preventDefault();
+    e.target.style.left = originalLeft;
+    e.target.style.top = originalTop;
   };
 
   return (
     <div
-      className="PartBoxItem"
-      draggable
-      onDragStart={handleDragStart}
-      onDrag={handleDrag}
-      style={{
-        top: part.top,
-        left: part.left,
-        position: "absolute",
-      }}
+      className="PartBox"
+      onDragStart={(e) => handleDragStart(e)}
+      onDrag={dragHandler}
+      onDragOver={onDragOver}
+      onDrop={dragEndHandler}
+      onDragLeave={dragLeaveHandler}
+      draggable="true"
     >
-      <img src={part.src} alt="Part" />
+      <img
+        src={part.src}
+        alt="Part"
+        style={{
+          position: "absolute",
+          zIndex: 3,
+          left: part.left + "px", // JSON 데이터에서 받아온 초기 left 값 설정
+          top: part.top + "px", // JSON 데이터에서 받아온 초기 top 값 설정
+        }}
+      />
     </div>
   );
 }
 
 function BackBox({ image }) {
   return (
-    <div
-      className="BackBoxItem"
-      style={{ position: "relative", display: "inline-block" }}
-    >
-      <img src={image} alt="Back" />
+    <div onDrop={handleDrop} onDragOver={allowDrop} className="BackBox">
+      <img
+        src={image}
+        alt="Back"
+        style={{
+          position: "absolute",
+          zIndex: 3,
+          left: backgroundLeft + "px",
+          top: backgroundTop + "px",
+        }}
+      />
     </div>
   );
 }
 
+function allowDrop(e) {
+  e.preventDefault();
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  // 드롭된 아이템을 처리하는 로직을 추가하세요.
+  console.log("아이템이 드롭되었습니다.");
+}
 export default MakeImage;
