@@ -17,28 +17,18 @@ app = Flask(__name__)
 def home():
 	return "home"
 
-@app.route('/test', methods=['POST'])
-def test():
+@app.route('/questionMaking', methods=['POST'])
+def questionMaking():
 	# 스프링에서 넘어온 json 데이터를 변수에 저장합니다.
     dto_json = request.get_json() 
     # 실제로 할때는 dto_json => qa_dict로 변환하는 작업 필요함
 
-    return dto_json
+    qa_dict = {}
 
-@app.route('/questionMaking', methods=['POST'])
-def questionMaking():
-	# 스프링에서 넘어온 json 데이터를 변수에 저장합니다.
-    #dto_json = request.get_json() 
-    # 실제로 할때는 dto_json => qa_dict로 변환하는 작업 필요함
-    
-    # 파이썬 기능부분 함수
-    qa_dict = {
-        '주인공의 이름은': "검정 거미 크룬", 
-        '이야기가 발생하는 장소는': "자취방의 구석진 곳",
-        '이야기의 시작은': "인간이 집을 나간 사이, 자취방에 들어와 집을 짓는다",
-        '주인공이 만나는 친구는': "바퀴벌레 폴",
-        '주인공이 만나는 어려움은': "집주인에게 잡혀 죽을 위험에 처함",
-    }
+    for i in dto_json: 
+        a = i["question"]
+        b = i["answer"]
+        qa_dict[a] = b
 
     # openapi처리 부분
     age = 5
