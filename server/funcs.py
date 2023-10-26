@@ -1,5 +1,9 @@
 
 import openai
+import io
+import base64
+from PIL import Image
+
 
 def questionMaking(age, num, qa_dict):
     type = ""
@@ -123,3 +127,15 @@ def openai_api(prompt, model_name):
     )
     output_text = response["choices"][0]["message"]["content"]
     return output_text
+
+def sd_image_processing(response, remove):
+    r = response.json()
+    
+    image = Image.open(io.BytesIO(base64.b64decode(r['images'][0])))
+    if remove:
+        image = remove(image)
+
+    path = f'./image/{uuid.uuid1()}.png'
+    image.save(path)
+    
+    return path

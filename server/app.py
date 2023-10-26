@@ -21,8 +21,6 @@ def home():
 def questionMaking():
 	# 스프링에서 넘어온 json 데이터를 변수에 저장합니다.
     dto_json = request.get_json() 
-    # 실제로 할때는 dto_json => qa_dict로 변환하는 작업 필요함
-
     qa_dict = {}
 
     for i in dto_json: 
@@ -50,12 +48,15 @@ def questionMaking():
         a = a.split("','")
 
         temp = [q] + a
-        temp = [i.replace("'", "").strip() for i in temp]
-    
+        temp = [i.replace("'", "").strip() for i in temp]            
+
         one_qa = {
             "question": temp[0],
             "options": temp[1:]
         }
+
+        if len(one_qa["options"]) == 1:
+            one_qa["options"] = one_qa["options"][0].split(',')
 
         r_format["questionData"].append(one_qa)
 
@@ -83,7 +84,7 @@ def storyMaking():
     }
     for i in range(len(refined_response)):
         temp = {}
-        temp["page"] = i
+        temp["page"] = i + 1
         temp["text"] = refined_response[i]
         r_format["contents"].append(temp)
 
@@ -95,64 +96,59 @@ def pictureMaking():
     dto_json = request.get_json() 
     # 실제로 할때는 dto_json => response2 변환하는 작업 필요함
 
-    response2 = []
-    story = ""
+    url = ""
 
-    for i in response2:
+    story_total = []
+    for i in dto_json["contents"]:
+        story_total.append(i['text'])
+
+    story = ""
+    for i in story_total:
         if i != "":
             story += i.split(":")[-1]
 
+    #gpt api
     prompt = characterMaking(story)
     response3 = openai_api(prompt, "gpt-4")
     response3 = response3.split("\n")
 
+    prompt = storyToBackground(story_total)
+    response4 = openai_api(prompt, "gpt-4") #"gpt-3.5-turbo"
+    response4 = response4.split("\n")
+
+    #걍 전처리
     char = []
     for i in response3:
         char.append(i.split(":")[-1].replace('"', '').strip())
-    
-    url = ""
-
-    paths = []
-    for i in char:
-        payload = {
-            "prompt": "1"+i+", simple background, full body",
-            "negative_prompt" : "nsfw",
-            "sd_model_checkpoint": "anything-v4.5.safetensors [1d1e459f9f]",
-            "steps": 20
-        }
-        
-        response = requests.post(url=f'{url}/sdapi/v1/txt2img', json=payload)
-        
-        r = response.json()
-        
-        image = Image.open(io.BytesIO(base64.b64decode(r['images'][0])))
-        image = remove(image)
-
-        path = f'./image/{uuid.uuid1()}.png'
-        image.save(path)
-        paths.append(path)
-
-    prompt = storyToBackground(response2)
-    response4 = openai_api(prompt, "gpt-4") #"gpt-3.5-turbo"
-    response4 = response4.split("\n")
 
     bg_prompt = []
     for i in response4:
         bg_prompt.append(i.split(':')[-1].replace("'","").strip())
-    bg_prompt
 
     with open('./asset/back_depth.jpeg', 'rb') as img:
         base64_string = base64.b64encode(img.read()).decode()
+    
+    # 캐릭터 이미지 생성
+    payload = {
+        "width": 512,
+        "height": 512,
+        "negative_prompt" : "nsfw",
+        "sd_model_checkpoint": "anything-v4.5.safetensors [1d1e459f9f]",
+        "steps": 20
+    }
 
-    for prompt in bg_prompt:
-        payload = {
-            "prompt": f"{prompt}, background, (masterpiece, best quality), no humans",
-            "negative_prompt" : "person, 1girl, boy, woman, man, solo, character, humans, animals",
-            "sd_model_checkpoint": "anything-v4.5.safetensors [1d1e459f9f]",
-            "steps": 20,
-            "width": 512,
-            "height": 512,
-            "alwayson_scripts": {
+    dto_json["char"] = []
+    for i in char:
+        payload["prompt"] = "1"+i+", simple background, full body"
+        path = sd_image_processing(requests.post(url=f'{url}/sdapi/v1/txt2img', json=payload))
+        temp_dict = {
+            "name" : i,
+            "url" : path       
+        }
+        dto_json["char"].append(temp_dict)
+
+    # 배경 이미지 생성
+    payload["alwayson_scripts"] = {
                 "controlnet": {
                 "args": [
                     {
@@ -164,16 +160,12 @@ def pictureMaking():
                     ]
                 }
             }
-        }
-        response = requests.post(url=f'{url}/sdapi/v1/txt2img', json=payload)
-        r = response.json()
-        
-        image = Image.open(io.BytesIO(base64.b64decode(r['images'][0])))
-        path = f'./image/{uuid.uuid1()}.png'
-        image.save(path)
-        paths.append(path)
+    for num, prompt in enumerate(bg_prompt):
+        payload["prompt"] = f"{prompt}, background, (masterpiece, best quality), no humans"
+        path = sd_image_processing(requests.post(url=f'{url}/sdapi/v1/txt2img', json=payload))
+        dto_json["contents"][num]["url"] = path
 
-    return r_format
+    return dto_json
 
 
  
