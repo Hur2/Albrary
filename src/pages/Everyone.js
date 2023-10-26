@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Everyone() {
-  return <h1>모두의책장</h1>;
+  return <div>모두의책장</div>;
 }
 
 export default Everyone;

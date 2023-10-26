@@ -104,7 +104,6 @@
 
 /* 프로그레스 바 스타일 */
 .progress-bar {
-  margin-top: 40px;
   text-align: center;
   font-size: 18px;
   background-color: #a69f93;
@@ -127,6 +126,7 @@
 
 .question {
   font-size: 36px;
+  margin-top: 70px;
   margin-bottom: 20px;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 500;

@@ -139,7 +139,7 @@
 .progress-bar {
   position: absolute;
   left: 50%;
-  top: 100px;
+  top: 120px;
   transform: translateX(-50%);
   width: 1024px;
   text-align: center;

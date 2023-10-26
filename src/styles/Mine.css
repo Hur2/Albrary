@@ -19,7 +19,7 @@
   display: block;
   transition: 0.25s;
   border: 3px solid #2e241d;
-  border-radius: 20px;
+  border-radius: 15px;
   box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.2);
   filter: brightness(1);
   margin-left: 8px;
