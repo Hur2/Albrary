@@ -1,0 +1,3 @@
+function MakeImage() {}
+
+export { MakeImage };

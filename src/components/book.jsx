@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Book({ id, title, author, coverPath }) {
   return (
-    <Link to={`/BookShow/${id}`}>
+    <Link className="book-link" to={`/BookShow/${id}`}>
       <div className="book-container">
         <img src={coverPath} alt="coverImage" />
         <div className="bookTitle">

@@ -18,7 +18,7 @@ function Make() {
         <MakeFrontCreator onPhaseChange={handlePhaseChange} />
       ) : null}
       {phase === 1 || phase === 2 || phase === 3 ? (
-        <MakeCircle onPhaseChange={handlePhaseChange} />
+        <MakeCircle phase={phase} />
       ) : null}
       {phase === 2 ? <TextCreator onPhaseChange={handlePhaseChange} /> : null}
       {phase === 3 ? <ImageCreator onPhaseChange={handlePhaseChange} /> : null}
@@ -45,11 +45,22 @@ function MakeFrontCreator({ onPhaseChange }) {
   );
 }
 
-function MakeCircle() {
+function MakeCircle({ phase }) {
   // 배경 원 효과
   const [timing, setTiming] = useState(0); // 페이드 인 시작 타이밍
   const [circleStyle, setCircleStyle] = useState({ width: 0, height: 0 });
   const [isCircleVisible, setIsCircleVisible] = useState(true);
+  const [nowPhaseTitle, setNowPhaseTitle] = useState(null);
+
+  useEffect(() => {
+    if (phase === 1) {
+      setNowPhaseTitle("1단계 :  이야기 구상하기");
+    } else if (phase === 2) {
+      setNowPhaseTitle("2단계 :  책 짓기");
+    } else {
+      setNowPhaseTitle(null);
+    }
+  }, [phase]);
 
   const handleResize = () => {
     // 화면 크기만큼 원 크기(width, height) 변경
@@ -102,6 +113,7 @@ function MakeCircle() {
           <div className="buttonESC" onClick={handleButtonClick}>
             <img src="img/make_button_back.png" alt="backbutton" />
           </div>
+          <div className="make-tab-title">{nowPhaseTitle}</div>
         </div>
       )}
     </div>

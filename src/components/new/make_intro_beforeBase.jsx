@@ -1,0 +1,71 @@
+import { useState, useEffect } from "react";
+
+function MakeIntroBeforeBase({ setPhase }) {
+  const [startTiming, setStartTiming] = useState(0); // Make_intro_before_base가 시작될 타이밍
+
+  const [nowFadeState, setFadeState] = useState(0);
+  const [nowPhase, setNowPhase] = useState(0);
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      setStartTiming(1);
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, []);
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      setFadeState(1);
+    }, 3500);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, []);
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      setFadeState(0);
+      setNowPhase(1);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, []);
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      setFadeState(1);
+    }, 7500);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, []);
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      setPhase(1);
+    }, 9000);
+
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, []);
+
+  return startTiming === 1 ? (
+    <div className={`fade-in ${nowFadeState ? "fade-out" : ""}`}>
+      <div className="intro-text">
+        {nowPhase === 0
+          ? "지금부터 책을 만들어 볼까요?"
+          : "우선 기본적인 정보를 입력해주세요"}
+      </div>
+    </div>
+  ) : null;
+}
+
+export { MakeIntroBeforeBase };

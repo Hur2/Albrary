@@ -1,0 +1,82 @@
+.make-tab {
+  position: absolute;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tab-title-circle {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+  font-size: 18px;
+}
+
+.tab-title-number {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  padding-bottom: 6px;
+}
+
+.tab-title-line-dot {
+  color: #333;
+  margin: 0 5px;
+}
+
+.tab-title-text {
+  width: 400px;
+  margin-left: 20px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+}
+
+.tab-progress-bar {
+  width: 500px;
+  height: 20px;
+  background-color: #a69f93;
+  border-radius: 20px;
+  border: 5px solid black;
+  margin-right: 50px;
+}
+
+.tab-progress {
+  height: 20px;
+  background-color: #eeb414;
+  border-radius: 20px;
+  width: 0;
+  transition: width 0.5s;
+}
+
+.tab-buttonESC {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.tab-buttonESC img {
+  width: 100px;
+  height: auto;
+  display: block;
+}
+
+.tab-line {
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75%; /* 가로 폭을 화면 전체 너비로 설정 */
+  height: 1px; /* 수평 선의 두께 설정 */
+  background-color: #ccc; /* 선의 색상 설정 */
+  margin-top: 10px; /* 위쪽 여백 조절 (원하는 여백 값으로 변경) */
+  z-index: 99;
+}

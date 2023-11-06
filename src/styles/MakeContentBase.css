@@ -1,0 +1,79 @@
+.make-content-wrapper {
+  z-index: 2;
+  position: absolute;
+  top: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.base-question {
+  font-family: "Gaegu", sans-serif;
+  font-weight: bold;
+  font-size: 42px;
+  text-align: center;
+  margin: 10px;
+}
+
+.base-form {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.base-answer {
+  flex: 1;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-family: "Gaegu", sans-serif;
+  font-weight: bold;
+  font-size: 42px;
+  text-align: center;
+  border: 3px solid rgb(187, 187, 187);
+  border-radius: 7px;
+  background-color: rgb(247, 247, 247);
+}
+
+.base-button {
+  width: 200px;
+  height: 75px;
+  border: 5px solid black;
+  border-radius: 10px;
+  font-family: "Gaegu", sans-serif;
+  font-weight: normal;
+  font-size: 42px;
+  background-color: #e7a957;
+}
+
+.base-button:hover {
+  background-color: #694f2c;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.75s ease-in-out; /* 페이드인 애니메이션 적용 */
+}
+
+.fade-out {
+  animation: fadeOut 0.75s ease-in-out forwards; /* 페이드인 애니메이션 적용 */
+}
