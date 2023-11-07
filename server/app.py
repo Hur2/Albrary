@@ -18,14 +18,14 @@ def home():
 	return "home"
 
 @app.route('/questionMaking', methods=['POST'])
-def questionMaking():
+def api_questionMaking():
 	# 스프링에서 넘어온 json 데이터를 변수에 저장합니다.
     dto_json = request.get_json() 
     qa_dict = {}
 
     for i in dto_json: 
-        a = i["question"]
-        b = i["answer"]
+        a = i["baseQuestion"]
+        b = i["baseAnswer"]
         qa_dict[a] = b
 
     # openapi처리 부분
@@ -63,21 +63,11 @@ def questionMaking():
     return r_format
 
 @app.route('/storyMaking', methods=['POST'])
-def storyMaking():
+def api_storyMaking():
 	# 스프링에서 넘어온 json 데이터를 변수에 저장합니다.
     dto_json = request.get_json() 
-
-    qa_dict = {}
-
-    for i in dto_json["questionData"]:
-        question = i['question']
-        options = i['options']
-        qa_dict[question] = options
-
-    prompt = storyMaking(9, qa_dict)
-    response = openai_api(prompt, "gpt-4")
-    response = response.split("\n")
-    refined_response = [i for i in response if i != '']
+    refined_response = story_generate(dto_json)
+    total_image = background_generate(refined_response)
 
     r_format = {
         "contents": []
@@ -86,88 +76,10 @@ def storyMaking():
         temp = {}
         temp["page"] = i + 1
         temp["text"] = refined_response[i]
+        temp["base64"] = total_image[i]
         r_format["contents"].append(temp)
 
     return r_format
 
-@app.route('/pictureMaking', methods=['POST'])
-def pictureMaking():
-	# 스프링에서 넘어온 json 데이터를 변수에 저장합니다.
-    dto_json = request.get_json() 
-    # 실제로 할때는 dto_json => response2 변환하는 작업 필요함
-
-    url = ""
-
-    story_total = []
-    for i in dto_json["contents"]:
-        story_total.append(i['text'])
-
-    story = ""
-    for i in story_total:
-        if i != "":
-            story += i.split(":")[-1]
-
-    #gpt api
-    prompt = characterMaking(story)
-    response3 = openai_api(prompt, "gpt-4")
-    response3 = response3.split("\n")
-
-    prompt = storyToBackground(story_total)
-    response4 = openai_api(prompt, "gpt-4") #"gpt-3.5-turbo"
-    response4 = response4.split("\n")
-
-    #걍 전처리
-    char = []
-    for i in response3:
-        char.append(i.split(":")[-1].replace('"', '').strip())
-
-    bg_prompt = []
-    for i in response4:
-        bg_prompt.append(i.split(':')[-1].replace("'","").strip())
-
-    with open('./asset/back_depth.jpeg', 'rb') as img:
-        base64_string = base64.b64encode(img.read()).decode()
-    
-    # 캐릭터 이미지 생성
-    payload = {
-        "width": 512,
-        "height": 512,
-        "negative_prompt" : "nsfw",
-        "sd_model_checkpoint": "anything-v4.5.safetensors [1d1e459f9f]",
-        "steps": 20
-    }
-
-    dto_json["char"] = []
-    for i in char:
-        payload["prompt"] = "1"+i+", simple background, full body"
-        path = sd_image_processing(requests.post(url=f'{url}/sdapi/v1/txt2img', json=payload))
-        temp_dict = {
-            "name" : i,
-            "url" : path       
-        }
-        dto_json["char"].append(temp_dict)
-
-    # 배경 이미지 생성
-    payload["alwayson_scripts"] = {
-                "controlnet": {
-                "args": [
-                    {
-                        "input_image": base64_string,
-                        "module" : "depth_midas",
-                        "model"  : "control_v11f1p_sd15_depth [cfd03158]",
-                        "weight" : 0.5,
-                    }
-                    ]
-                }
-            }
-    for num, prompt in enumerate(bg_prompt):
-        payload["prompt"] = f"{prompt}, background, (masterpiece, best quality), no humans"
-        path = sd_image_processing(requests.post(url=f'{url}/sdapi/v1/txt2img', json=payload))
-        dto_json["contents"][num]["url"] = path
-
-    return dto_json
-
-
- 
 if __name__ == '__name__':
     app.run('0.0.0.0',port=5000,debug=True)

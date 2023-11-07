@@ -3,6 +3,7 @@ import openai
 import io
 import base64
 from PIL import Image
+import requests
 
 
 def questionMaking(age, num, qa_dict):
@@ -35,7 +36,7 @@ def questionMaking(age, num, qa_dict):
     # 이걸 gpt api로 보내고 받은 결과물을 반환해주면 될듯
 
 
-def storyMaking(num, qa_dict):
+def storyMaking_prompt(num, qa_dict):
 
     type = ""
     world_view = ""
@@ -92,7 +93,7 @@ def characterMaking(world_view):
     # 이걸 gpt api로 보내고 받은 결과물을 반환해주면 될듯
 
 
-def storyToBackground(stories):
+def storyToBackground_prompt(stories):
 
     story = ""
     type = ""
@@ -128,14 +129,64 @@ def openai_api(prompt, model_name):
     output_text = response["choices"][0]["message"]["content"]
     return output_text
 
-def sd_image_processing(response, remove):
-    r = response.json()
-    
-    image = Image.open(io.BytesIO(base64.b64decode(r['images'][0])))
-    if remove:
-        image = remove(image)
+def story_generate(dto_json):
+    qa_dict = {}
 
-    path = f'./image/{uuid.uuid1()}.png'
-    image.save(path)
+    for i in dto_json["questionData"]:
+        question = i['question']
+        options = i['options']
+        qa_dict[question] = options
+
+    prompt = storyMaking_prompt(9, qa_dict)
+    response = openai_api(prompt, "gpt-4")
+    response = response.split("\n")
+    refined_response = [i for i in response if i != '']
+
+    return refined_response
+
+def background_generate(refined_response):
+    url = ""
+
+    prompt = storyToBackground_prompt(refined_response)
+    bg_response = openai_api(prompt, "gpt-4") #"gpt-3.5-turbo"
+    bg_response = bg_response.split("\n")
+
+    #걍 전처리
+    bg_prompt = []
+    for i in bg_response:
+        bg_prompt.append(i.split(':')[-1].replace("'","").strip())
+
+    #sd 요청 payload
+    with open('./asset/back_depth.jpeg', 'rb') as img:
+        base64_string = base64.b64encode(img.read()).decode()
     
-    return path
+    payload = {
+        "width": 512,
+        "height": 512,
+        "negative_prompt" : "nsfw",
+        "sd_model_checkpoint": "anything-v4.5.safetensors [1d1e459f9f]",
+        "steps": 20,
+        "alwayson_scripts" : {
+                "controlnet": {
+                "args": [
+                    {
+                        "input_image": base64_string,
+                        "module" : "depth_midas",
+                        "model"  : "control_v11f1p_sd15_depth [cfd03158]",
+                        "weight" : 0.5,
+                    }
+                    ]
+                }
+            }
+    }
+
+    total_image = []
+    
+    #sd 생성
+    for prompt in bg_prompt:
+        payload["prompt"] = f"{prompt}, background, (masterpiece, best quality), no humans"
+        response = requests.post(url=f'{url}/sdapi/v1/txt2img', json=payload)
+        r = response.json()
+        total_image.append(r['images'][0])
+    
+    return total_image
