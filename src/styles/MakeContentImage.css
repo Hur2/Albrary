@@ -1,0 +1,6 @@
+.image-container 
+{
+    position: absolute;
+    z-index: 2;
+    top: 180px;
+}
