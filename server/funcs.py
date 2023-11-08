@@ -138,7 +138,7 @@ def story_generate(dto_json):
         qa_dict[question] = options
 
     prompt = storyMaking_prompt(9, qa_dict)
-    response = openai_api(prompt, "gpt-4")
+    response = openai_api(prompt, "gpt-4-1106-preview")
     response = response.split("\n")
     refined_response = [i for i in response if i != '']
 
@@ -148,7 +148,7 @@ def background_generate(refined_response):
     url = ""
 
     prompt = storyToBackground_prompt(refined_response)
-    bg_response = openai_api(prompt, "gpt-4") #"gpt-3.5-turbo"
+    bg_response = openai_api(prompt, "gpt-4-1106-preview") #"gpt-3.5-turbo"
     bg_response = bg_response.split("\n")
 
     #걍 전처리
