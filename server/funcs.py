@@ -118,7 +118,7 @@ def storyToBackground_prompt(stories):
 
 
 def openai_api(prompt, model_name):
-    openai.api_key = "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" #api key 입력해야 함
+    openai.api_key = "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" #api key 입력해야 함
 
     response = openai.ChatCompletion.create(
     model=model_name,
@@ -132,7 +132,7 @@ def openai_api(prompt, model_name):
 def story_generate(dto_json):
     qa_dict = {}
 
-    for i in dto_json["questionData"]:
+    for i in dto_json:
         question = i['question']['question']
         options = i['option']
         qa_dict[question] = options

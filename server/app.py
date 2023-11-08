@@ -8,8 +8,6 @@ import io
 import base64
 from PIL import Image
 from rembg import remove
-import uuid
-
 
 app = Flask(__name__)
 
@@ -76,7 +74,7 @@ def api_storyMaking():
         temp = {}
         temp["page"] = i + 1
         temp["text"] = refined_response[i]
-        temp["base64"] = total_image[i]
+        temp["base64"] = "data:image/png;base64," + total_image[i]
         r_format["contents"].append(temp)
 
     return r_format
