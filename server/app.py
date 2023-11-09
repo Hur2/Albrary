@@ -64,7 +64,7 @@ def api_questionMaking():
 def api_storyMaking():
 	# 스프링에서 넘어온 json 데이터를 변수에 저장합니다.
     dto_json = request.get_json() 
-    refined_response = story_generate(dto_json)
+    refined_response = story_generate(dto_json, 9)
     total_image = background_generate(refined_response)
 
     r_format = {
