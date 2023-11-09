@@ -118,7 +118,7 @@ def storyToBackground_prompt(stories):
 
 
 def openai_api(prompt, model_name):
-    openai.api_key = "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" #api key 입력해야 함
+    openai.api_key = "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" #api key 입력해야 함
 
     response = openai.ChatCompletion.create(
     model=model_name,
