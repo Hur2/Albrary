@@ -11,6 +11,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.demo.page.entity.PageEntity;
+import com.example.demo.book.entity.BookEntity;
+import com.example.demo.book.repository.BookRepository;
 
 import java.util.List;
 
@@ -28,11 +30,11 @@ public class PageService {
         return pageRepository.findAll();
     }
 
-    public PageEntity getPageById(Long id){ //id로 page 반환
-        Optional<PageEntity> page = pageRepository.findById(id);
-        if (page.isPresent()){
-            return page.get();
+    public List<PageEntity> getPagesByBookId(Long bookId) { // bookId로 모든 페이지 반환
+        List<PageEntity> pages = pageRepository.findByBookId(bookId);
+        if (pages.isEmpty()) {
+            throw new EntityNotFoundException("값을 찾을 수 없습니다. 존재하지 않는 book id : " + bookId);
         }
-        throw new EntityNotFoundException("값을 찾을 수 없습니다. 존재하지 않는 id : " + id);
+        return pages;
     }
 }

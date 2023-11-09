@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import  jakarta.persistence.Entity;
 import  jakarta.persistence.Table;
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,12 +18,11 @@ public class QuestionEntity {
     private Long id;
 
     @Column(length = 100, nullable = false) // 질문 - gpt로부터 받아옴
-    private String asking;
+    private String baseQuestions;
 
-    @Column(length = 500, nullable = false) // 선택지들 -> gpt로부터 받아옴
-    private String selection;
+    public QuestionEntity(){}
 
-    @Column(length = 100, nullable = false) // 고른 선택지 -> gpt에게 반환
-    private String answer;
-
+    public QuestionEntity(String baseQuestion){
+        this.baseQuestions = baseQuestions;
+    }
 }

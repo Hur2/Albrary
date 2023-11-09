@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.page.entity.PageEntity;
 import com.example.demo.page.service.PageService;
+import com.example.demo.book.entity.BookEntity;
+import com.example.demo.book.repository.BookRepository;
 
 import java.util.List;
 
@@ -26,8 +28,8 @@ public class PageController {
         return pageService.getAllPages();
     }
 
-    @GetMapping("/{id}")
-    public PageEntity getPageById(@PathVariable Long id){
-        return pageService.getPageById(id);
+    @GetMapping("/{bookId}")
+    public List<PageEntity> getPagesByBookId(@PathVariable Long bookId){
+        return pageService.getPagesByBookId(bookId);
     }
 }

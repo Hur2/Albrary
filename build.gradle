@@ -34,6 +34,7 @@ dependencies {
 
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'org.python', name: 'jython-standalone', version: '2.7.3'
 }
 
 tasks.named('test') {
