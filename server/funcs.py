@@ -48,18 +48,19 @@ def storyMaking_prompt(num, qa_dict):
     
     prompt = f'''
 당신은 대한민국의 최고의 동화 작가입니다.
-아래의 세계관을 참고하여서 동화책을 작성하시오.
+아래의 세계관을 참고하여서 5살이 읽을 동화책을 작성하시오.
 
-이야기가 매끄럽게 이어지지 않는다면, 세계관을 추가해도 됩니다.
-동화책은 반드시 답변의 형식에 맞게 작성하시오.
-한 문단은 3문장 이내입니다. 
-한 문단은 반드시 하나의 장면만 묘사하시오.
-동화는 구체적이고 창의적으로 써야합니다.
+스토리가 매끄럽게 이어지지 않는다면, 세계관을 추가해도 됩니다.
+스토리는 구체적이고 창의적으로 써야합니다.
 답변은 반드시 동화의 스토리만 다루시오.
+스토리는 자연스럽게 이어져야 합니다.
+
+한 문단은 2문장 이내입니다. 
+한 문단은 반드시 하나의 장면만 묘사하시오.
 
 세계관:
 {world_view}
-다음의 형식을 따라 답변하시오.
+반드시 다음의 형식에 맞게 답변하시오.
 {type}
 
 '''
@@ -107,6 +108,7 @@ def storyToBackground_prompt(stories):
     prompt = f'''
 보기의 스토리를 참고하여, 각 문단마다 장소 정보를 추출하시오.
 등장 캐릭터을 있는 장소에 대해서 영어로 5단어 이내로 서술하시오.
+생명체와 관련된 영어 단어는 제외하시오.
 
 [스토리]
 {story}
@@ -163,13 +165,13 @@ def background_generate(refined_response):
         bg_prompt.append(i.split(':')[-1].replace("'","").strip())
 
     #sd 요청 payload
-    with open('./asset/back_depth.jpeg', 'rb') as img:
+    with open('./asset/crayon.png', 'rb') as img:
         base64_string = base64.b64encode(img.read()).decode()
     
     payload = {
-        "width": 512,
+        "width": 1024,
         "height": 512,
-        "negative_prompt" : "nsfw",
+        "negative_prompt" : "human, animal",
         "sd_model_checkpoint": "anything-v4.5.safetensors [1d1e459f9f]",
         "steps": 20,
         "alwayson_scripts" : {
@@ -177,9 +179,9 @@ def background_generate(refined_response):
                 "args": [
                     {
                         "input_image": base64_string,
-                        "module" : "depth_midas",
-                        "model"  : "control_v11f1p_sd15_depth [cfd03158]",
-                        "weight" : 0.5,
+                        "module" : "shuffle",
+                        "model"  : "control_v11e_sd15_shuffle [526bfdae]",
+                        "weight" : 0.45,
                     }
                     ]
                 }
@@ -190,7 +192,7 @@ def background_generate(refined_response):
     
     #sd 생성
     for prompt in bg_prompt:
-        payload["prompt"] = f"{prompt}, background, (masterpiece, best quality), no humans"
+        payload["prompt"] = f"{prompt}, background, crayon style"
         response = requests.post(url=f'{url}/sdapi/v1/txt2img', json=payload)
         r = response.json()
         total_image.append(r['images'][0])
