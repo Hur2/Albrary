@@ -4,6 +4,31 @@ import io
 import base64
 from PIL import Image
 import requests
+import cv2
+import numpy as np
+
+def make_noise_disk(H, W, C, F):
+    noise = np.random.uniform(low=0, high=1, size=((H // F) + 2, (W // F) + 2, C))
+    noise = cv2.resize(noise, (W + 2 * F, H + 2 * F), interpolation=cv2.INTER_CUBIC)
+    noise = noise[F: F + H, F: F + W]
+    noise -= np.min(noise)
+    noise /= np.max(noise)
+    if C == 1:
+        noise = noise[:, :, None]
+    return noise
+
+def shuffle(img, h=None, w=None, f=None):
+    H, W, C = img.shape
+    if h is None:
+        h = H
+    if w is None:
+        w = W
+    if f is None:
+        f = 256
+    x = make_noise_disk(h, w, 1, f) * float(W - 1)
+    y = make_noise_disk(h, w, 1, f) * float(H - 1)
+    flow = np.concatenate([x, y], axis=2).astype(np.float32)
+    return cv2.remap(img, flow, None, cv2.INTER_LINEAR)
 
 
 def questionMaking(age, num, qa_dict):
@@ -54,9 +79,7 @@ def storyMaking_prompt(num, qa_dict):
 스토리는 구체적이고 창의적으로 써야합니다.
 답변은 반드시 동화의 스토리만 다루시오.
 스토리는 자연스럽게 이어져야 합니다.
-
-한 문단은 2문장 이내입니다. 
-한 문단은 반드시 하나의 장면만 묘사하시오.
+반드시 한 문단은 2문장입니다.
 
 세계관:
 {world_view}
@@ -139,7 +162,7 @@ def story_generate(dto_json, len_sentence):
         options = i['option']
         qa_dict[question] = options
 
-    prompt = storyMaking_prompt(9, qa_dict)
+    prompt = storyMaking_prompt(len_sentence, qa_dict)
     response = openai_api(prompt, "gpt-4-1106-preview")
     response = response.split("\n")
     refined_response = [i for i in response if i != '']
@@ -165,8 +188,10 @@ def background_generate(refined_response):
         bg_prompt.append(i.split(':')[-1].replace("'","").strip())
 
     #sd 요청 payload
-    with open('./asset/crayon.png', 'rb') as img:
-        base64_string = base64.b64encode(img.read()).decode()
+    control_img = cv2.imread('./asset/crayon.png')
+    control_img = shuffle(control_img)
+    control_img = Image.fromarray(control_img)
+    base64_string = base64.b64encode(control_img).decode()
     
     payload = {
         "width": 1024,
@@ -177,12 +202,11 @@ def background_generate(refined_response):
         "alwayson_scripts" : {
                 "controlnet": {
                 "args": [
-                    {
-                        "input_image": base64_string,
-                        "module" : "shuffle",
-                        "model"  : "control_v11e_sd15_shuffle [526bfdae]",
-                        "weight" : 0.45,
-                    }
+                        {
+                            "input_image": base64_string,
+                            "model"  : "control_v11e_sd15_shuffle [526bfdae]",
+                            "weight" : 0.45,
+                        }
                     ]
                 }
             }

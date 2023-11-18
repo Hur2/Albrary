@@ -1,13 +1,6 @@
 from flask import Flask, request
-import json
 from funcs import *
 
-import json
-import requests
-import io
-import base64
-from PIL import Image
-from rembg import remove
 
 app = Flask(__name__)
 
@@ -31,7 +24,7 @@ def api_questionMaking():
     question_num = 5
 
     prompt = questionMaking(age, question_num, qa_dict)
-    response = openai_api(prompt, "gpt-4")
+    response = openai_api(prompt, "gpt-4-1106-preview")
     response = response.split("\n")
 	
     refined_response = [i.split(":")[1:] for i in response if i != ''] ##엔터 구분이 없는 경우 예외처리
@@ -73,7 +66,7 @@ def api_storyMaking():
     for i in range(len(refined_response)):
         temp = {}
         temp["page"] = i + 1
-        temp["text"] = refined_response[i]
+        temp["text"] = refined_response[i][4:].strip().split('. ')
         temp["base64"] = total_image[i]
         r_format["contents"].append(temp)
 
