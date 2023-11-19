@@ -176,7 +176,7 @@ def story_generate(dto_json, len_sentence):
     return refined_response
 
 def background_generate(refined_response):
-    url = ""
+    url = "" # webui endpoint
 
     prompt = storyToBackground_prompt(refined_response)
     bg_response = openai_api(prompt, "gpt-4-1106-preview") #"gpt-3.5-turbo"
@@ -190,8 +190,8 @@ def background_generate(refined_response):
     #sd 요청 payload
     control_img = cv2.imread('./asset/crayon.png')
     control_img = shuffle(control_img)
-    control_img = Image.fromarray(control_img)
-    base64_string = base64.b64encode(control_img).decode()
+    control_img = cv2.imencode('.png', control_img)
+    base64_string = base64.b64encode(control_img[1]).decode()
     
     payload = {
         "width": 1024,
