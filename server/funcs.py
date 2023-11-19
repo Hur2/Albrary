@@ -143,7 +143,10 @@ def storyToBackground_prompt(stories):
 
 
 def openai_api(prompt, model_name):
-    openai.api_key = "" #api key 입력해야 함
+    f = open("/Users/iyonghyeon/Documents/cap/config.txt", 'r')
+    api_key = f.readline().strip()
+
+    openai.api_key = api_key #api key 입력해야 함
 
     response = openai.ChatCompletion.create(
     model=model_name,
@@ -176,7 +179,11 @@ def story_generate(dto_json, len_sentence):
     return refined_response
 
 def background_generate(refined_response):
-    url = "" # webui endpoint
+    f = open("/Users/iyonghyeon/Documents/cap/config.txt", 'r')
+    f.readline()
+    endpoint = f.readline().strip()
+
+    url = endpoint # webui endpoint
 
     prompt = storyToBackground_prompt(refined_response)
     bg_response = openai_api(prompt, "gpt-4-1106-preview") #"gpt-3.5-turbo"
