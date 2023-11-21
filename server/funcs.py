@@ -6,6 +6,7 @@ from PIL import Image
 import requests
 import cv2
 import numpy as np
+import random
 
 def make_noise_disk(H, W, C, F):
     noise = np.random.uniform(low=0, high=1, size=((H // F) + 2, (W // F) + 2, C))
@@ -229,3 +230,51 @@ def background_generate(refined_response):
         total_image.append(r['images'][0])
     
     return total_image
+
+
+def making_init_question():
+    first = "주인공의 이름은?"
+    second = "주인공의 성별은?"
+    third = [
+        "주인공이 좋아하는 노래는?",
+        "주인공이 좋아하는 색깔은?",
+        "주인공이 좋아하는 놀이는?",
+        "주인공이 좋아하는 계절은?",
+        "주인공이 좋아하는 동물은?",
+        "주인공의 가장 특별한 추억은?"
+    ]
+    forth = [
+        "주인공의 가장 친한 친구의 이름은?,주인공이 처음으로 만나는 친구의 성격은?",
+        "주인공의 가장 친한 친구의 이름은?,주인공의 친구가 가진 특별한 능력은?",
+        "주인공에게 가장 큰 영감을 주는 가족은?",
+        "주인공이 가족과 함께하는 특별한 기념일은?"
+    ]
+    fifth = [
+        "동화 속 왕국의 이름은?",
+        "동화 속에 나오는 특별한 장소는?",
+        "동화 속에 사람들은 먹는 음식은?",
+        "동화 속에 존재하는 특별한 날씨현상은?",
+        "동화 속에 존재하는 특별한 축제는?"
+    ]
+    sixth = [
+        "주인공이 소유한 특별한 물건은?",
+        "주인공이 마주치는 어려움은?",
+        "주인공이 가장 감명 깊게 배우는 교훈은?",
+        "주인공이 꿈꾸는 모험의 목적지는?",
+        "이야기에 등장하는 악당의 이름은?"
+    ]
+
+
+    total = [first, second, random.choice(third)] + random.choice(forth).split(',') + [
+        random.choice(fifth), random.choice(sixth)]
+    
+    r_format = {
+        "questionData": []
+    }
+    for i in total:
+        one_qa = {
+            "question": i
+        }
+        r_format["questionData"].append(one_qa)
+
+    return r_format

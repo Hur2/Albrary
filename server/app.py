@@ -57,7 +57,7 @@ def api_questionMaking():
 def api_storyMaking():
 	# 스프링에서 넘어온 json 데이터를 변수에 저장합니다.
     dto_json = request.get_json() 
-    refined_response = story_generate(dto_json, 9)
+    refined_response = story_generate(dto_json, 7)
     total_image = background_generate(refined_response)
 
     r_format = {
@@ -71,6 +71,10 @@ def api_storyMaking():
         r_format["contents"].append(temp)
 
     return r_format
+
+@app.route('/initQuest', methods=['POST'])
+def make_initQuest():
+    return making_init_question()
 
 if __name__ == '__name__':
     app.run('0.0.0.0',port=5000,debug=True)
