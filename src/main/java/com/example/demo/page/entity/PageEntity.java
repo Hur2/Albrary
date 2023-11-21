@@ -18,16 +18,9 @@ public class PageEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 500, nullable = false) // 책 페이지별 내용 -> gpt로부터 받아옴
-    private String text;
-
     @Lob
     @Column
-    private byte[] content_background; // 책 페이지별 이미지 (base64) -> gpt로부터 받아옴
-
-    @Lob
-    @Column
-    private byte[] content_drawing; // 책 페이지별 이미지 (base64) -> gpt로부터 받아옴
+    private byte[] content_data; // 책 페이지별 이미지 (base64) -> gpt로부터 받아옴
 
     @ManyToOne
     @JoinColumn(name = "book_id")

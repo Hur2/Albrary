@@ -1,5 +1,6 @@
 package com.example.demo.book.entity;
 
+//import com.example.demo.user.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -36,4 +37,7 @@ public class BookEntity {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book", fetch = FetchType.EAGER)
     private List<PageEntity> pages;
+
+    @Column(name = "user_id")
+    private Long userId;
 }

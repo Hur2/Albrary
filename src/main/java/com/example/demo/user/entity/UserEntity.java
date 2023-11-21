@@ -1,12 +1,10 @@
 package com.example.demo.user.entity;
 
+import com.example.demo.user.enumer.ProfileImageType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import  jakarta.persistence.Entity;
-import  jakarta.persistence.Table;
 
 @Entity
 @Getter
@@ -18,11 +16,15 @@ public class UserEntity {
     private Long id;
 
     @Column(length = 20, nullable = false) // 아이디
-    private String identification;
+    private String userName;
 
     @Column(length = 20, nullable = false) //비밀번호
-    private String password;
+    private String userId;
 
     @Column(length = 20, nullable = false) // 이름
-    private String name;
+    private String userPassword;
+
+    @Enumerated(EnumType.STRING)
+    private ProfileImageType profile_image; // 책 표지 이미지 (base64) -> gpt로부터 받아옴
 }
+
