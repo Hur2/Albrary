@@ -72,7 +72,7 @@ def api_storyMaking():
 
     return r_format
 
-@app.route('/initQuest', methods=['POST'])
+@app.route('/initQuest', methods=['GET'])
 def make_initQuest():
     return making_init_question()
 
