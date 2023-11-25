@@ -76,5 +76,16 @@ def api_storyMaking():
 def make_initQuest():
     return making_init_question()
 
+@app.route('/makeLineart', methods=['POST'])
+def make_lineart():
+    dto_json = request.get_json() 
+    keyword = dto_json['keyword']
+
+    image = generate_lineart(keyword)
+    dto_json['image'] = image
+
+    return dto_json
+
+
 if __name__ == '__name__':
     app.run('0.0.0.0',port=5000,debug=True)

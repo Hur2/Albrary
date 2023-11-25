@@ -7,6 +7,7 @@ import requests
 import cv2
 import numpy as np
 import random
+from rembg import remove
 
 def make_noise_disk(H, W, C, F):
     noise = np.random.uniform(low=0, high=1, size=((H // F) + 2, (W // F) + 2, C))
@@ -30,6 +31,37 @@ def shuffle(img, h=None, w=None, f=None):
     y = make_noise_disk(h, w, 1, f) * float(H - 1)
     flow = np.concatenate([x, y], axis=2).astype(np.float32)
     return cv2.remap(img, flow, None, cv2.INTER_LINEAR)
+
+def stringToRGB(base64_string):
+    imgdata = base64.b64decode(base64_string)
+    dataBytesIO = io.BytesIO(imgdata)
+    image = Image.open(dataBytesIO)
+    return cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
+
+def generate_lineart(keyword):
+    f = open("/Users/iyonghyeon/Documents/cap/config.txt", 'r')
+    f.readline()
+    endpoint = f.readline().strip()
+    
+    payload = {
+        "width": 512,
+        "height": 512,
+        "prompt": f"one {keyword}, lineart, simple background, <lora:animeLineartMangaLike_v30MangaLike:1>",
+        "negative_prompt" : "nsfw",
+        "sd_model_checkpoint": "anything-v4.5.safetensors [1d1e459f9f]",
+        "steps": 20,
+    }
+
+    response = requests.post(url=f'{endpoint}/sdapi/v1/txt2img', json=payload)
+    r = response.json()
+    image = stringToRGB(r['images'][0])
+    image = cv2.resize(image, dsize=(256, 256), interpolation=cv2.INTER_LANCZOS4)
+    image = remove(image)
+
+    image = cv2.imencode('.png', image)
+    base64_string = base64.b64encode(image[1]).decode()
+
+    return base64_string
 
 
 def questionMaking(age, num, qa_dict):
