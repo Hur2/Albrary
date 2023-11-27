@@ -80,6 +80,7 @@ def make_initQuest():
 def make_lineart():
     dto_json = request.get_json() 
     keyword = dto_json['keyword']
+    keyword = deepl_trans(keyword, "EN-US")
 
     image = generate_lineart(keyword)
     dto_json['image'] = image

@@ -8,6 +8,13 @@ import cv2
 import numpy as np
 import random
 from rembg import remove
+import deepl
+
+def deepl_trans(message, tar_lan):
+    auth_key = "be790c4a-9c58-a5fc-4f6a-bea242f8f16f:fx"
+    translator = deepl.Translator(auth_key)
+    result = translator.translate_text(message, target_lang=tar_lan)
+    return result.text
 
 def make_noise_disk(H, W, C, F):
     noise = np.random.uniform(low=0, high=1, size=((H // F) + 2, (W // F) + 2, C))
