@@ -34,8 +34,8 @@ dependencies {
 
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation group: 'org.python', name: 'jython-standalone', version: '2.7.3'
 	implementation group: 'org.javassist', name: 'javassist', version: '3.15.0-GA'
+	implementation 'com.itextpdf:itext7-core:7.1.18'
 }
 
 tasks.named('test') {

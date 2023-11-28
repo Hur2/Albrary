@@ -6,15 +6,13 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "http://localhost:3000")
 public class LoginController {
 
     private final UserRepository userRepository;
@@ -28,19 +26,21 @@ public class LoginController {
 
     //로그인
     @PostMapping("/login")
+    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody UserEntity user) {
         Optional<UserEntity> foundUser = userRepository.findByUserId(user.getUserId());
 
         Map<String, Object> response = new HashMap<>();
         if (!foundUser.isPresent()) {
-            response.put("isLogin", "없는 userId");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            response.put("isLogin", "아이디를 잘못 입력하였습니다.");
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         }
 
         UserEntity existingUser = foundUser.get();
         if (!existingUser.getUserPassword().equals(user.getUserPassword())) {
-            response.put("isLogin", "틀린 userPassword");
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            response.put("isLogin", "비밀번호를 잘못 입력하였습니다.");
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         }
 
         // 로그인 성공 - 세션에 사용자 ID 저장
@@ -50,9 +50,7 @@ public class LoginController {
         Map<String, String> userInfo = new LinkedHashMap<>();
         userInfo.put("Id", existingUser.getId().toString());
         userInfo.put("userName", existingUser.getUserName());
-        userInfo.put("userId", existingUser.getUserId());
-        userInfo.put("userPassword", existingUser.getUserPassword());
-        userInfo.put("profile_image", Integer.toString(existingUser.getProfile_image().getValue()));;
+        userInfo.put("userProfileImage", Integer.toString(existingUser.getUserProfileImage().getValue()));;
 
         List<Map<String, String>> userInfoList = new ArrayList<>();
         userInfoList.add(userInfo);
@@ -63,6 +61,7 @@ public class LoginController {
     }
 
     @PostMapping("/logout")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Map<String, String>> logoutUser() {
         // 세션에서 userId 속성 제거
         session.removeAttribute("userId");

@@ -1,10 +1,7 @@
 package com.example.demo.page.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.example.demo.page.entity.PageEntity;
 import com.example.demo.page.service.PageService;
 import com.example.demo.book.entity.BookEntity;
@@ -14,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/page")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PageController {
 
     private final PageService pageService;
