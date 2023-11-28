@@ -1,0 +1,110 @@
+.make-tab {
+  position: absolute;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tab-icon-container {
+  width: 384px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.line-progress {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 10px; /* 선의 굵기 설정 */
+  background: #19bcc8;
+  transition: width 3s;
+  z-index: 100;
+}
+
+.line-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 10px; /* 선의 굵기 설정 */
+  background: #b6b8ba;
+}
+
+.icon-wrapper {
+  z-index: 101;
+}
+
+.icon-base {
+  position: absolute;
+  width: 80px;
+  left: 10%;
+  transform: translate(-50%, -50%);
+}
+
+.icon-text {
+  position: absolute;
+  width: 80px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.icon-draw {
+  position: absolute;
+  width: 80px;
+  left: 90%;
+  transform: translate(-50%, -50%);
+}
+
+.tab-title-text {
+  width: 400px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 4px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 800;
+  text-align: center;
+  font-size: 36px;
+}
+
+.tab-progress-bar {
+  width: 500px;
+  height: 20px;
+  background-color: #b6b8ba;
+  border-radius: 20px;
+  border: 5px solid rgb(99, 99, 99);
+}
+
+.tab-progress {
+  height: 20px;
+  background-color: #f5c950;
+  border-radius: 20px;
+  width: 0;
+  transition: width 0.5s;
+}
+
+.tab-buttonESC {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.tab-buttonESC img {
+  width: 100px;
+  height: auto;
+  display: block;
+}
+
+.tab-line {
+  position: absolute;
+  top: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75%;
+  height: 1px;
+  background-color: #c7c7c7;
+  margin-top: 10px;
+  z-index: 99;
+}

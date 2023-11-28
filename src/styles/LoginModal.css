@@ -1,0 +1,19 @@
+.login-modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  position: fixed;
+  top: 110px;
+  right: 0px;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  max-width: 300px;
+  width: 100%;
+  font-size: 32px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  color: black;
+
+  box-sizing: border-box;
+}

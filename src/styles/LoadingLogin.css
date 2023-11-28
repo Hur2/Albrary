@@ -1,0 +1,30 @@
+.loading-container {
+  font-size: 48px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+}
+
+.loading-login-button {
+  margin-top: 20px;
+  width: 130px;
+  height: 55px;
+  border-radius: 50px;
+  border: none;
+
+  background-color: rgb(241, 202, 71);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.loading-login-button:hover {
+  background-color: rgb(233, 195, 70);
+}
+
+.loading-login-link {
+  color: inherit;
+  text-decoration: none;
+  font-size: 28px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  color: white;
+}

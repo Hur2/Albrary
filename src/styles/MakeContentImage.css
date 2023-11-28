@@ -1,0 +1,40 @@
+.image-wrapper {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+}
+
+.btn-container {
+  position: absolute;
+  top: 560px;
+}
+
+.canvas-wrapper {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+}
+
+.btn-draw-wrapper {
+  position: absolute;
+  z-index: 3;
+  top: 512px;
+  left: 0;
+}
+
+.text-wrapper {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 512px;
+  font-family: "Gaegu", sans-serif;
+  font-weight: bold;
+  font-size: 42px;
+}
+
+.btn-wrapper {
+  position: absolute;
+  z-index: 2;
+  top: 550px;
+  left: 0;
+}

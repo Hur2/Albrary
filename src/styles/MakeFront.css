@@ -1,0 +1,108 @@
+.make-front-container {
+  text-align: center;
+  height: calc(100vh - 77px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.title {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 76px;
+}
+
+.intro {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 300;
+  color: rgb(58, 58, 58);
+  font-size: 32px;
+}
+
+.content button {
+  background-image: linear-gradient(to bottom right, #ffb413, rgb(39, 161, 58));
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 25px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  transition: background-image 3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+
+.content button:hover {
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(255, 196, 0),
+    rgb(89, 160, 22)
+  );
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.content-select {
+  display: flex;
+}
+
+.left-button,
+.right-button {
+  width: 600px;
+  height: 550px;
+  border: 1px solid rgba(187, 187, 187, 0);
+  cursor: pointer;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.left-button:hover {
+  background-color: rgb(168, 207, 223);
+}
+
+.right-button:hover {
+  background-color: rgb(245, 178, 162);
+}
+
+.left-button {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.right-button {
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.button-title {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 600;
+  font-size: 52px;
+  margin-left: 40px;
+  margin-bottom: 30px;
+}
+
+.button-intro {
+  color: rgb(75, 75, 75);
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 300;
+  margin-left: 40px;
+  font-size: 32px;
+}

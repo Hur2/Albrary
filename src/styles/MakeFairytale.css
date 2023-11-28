@@ -1,0 +1,877 @@
+/* Content field */
+.make-wrapper {
+  position: relative;
+  top: 50px;
+  left: 50px;
+  width: 1024px;
+  height: 512px;
+}
+
+.make-content-shadow {
+  /* content에 직접 shadow 적용시 screenshot 과정에서 효과 들어가서 분리*/
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  top: 110px;
+  left: 50px;
+  width: 1024px;
+  height: 512px;
+  z-index: -1000;
+  border: 1px solid rgb(206, 206, 206);
+}
+
+.make-content-area {
+  overflow: hidden;
+}
+
+.make-text {
+  font-family: "MaplestoryBold";
+  font-size: 42px;
+  color: black;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px white,
+    1px 1px 0 white;
+}
+
+@font-face {
+  font-family: "MaplestoryBold";
+  src: url("../../public/fonts/MaplestoryBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "MaplestoryLight";
+  src: url("../../public/fonts/MaplestoryLight.ttf") format("truetype");
+}
+
+.content-ai-background {
+  position: absolute;
+  width: 1024px;
+  height: 512px;
+}
+
+/* button */
+.button-normal {
+  width: 230px;
+  height: 50px;
+  background-color: #eeeeee;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryBold";
+  font-size: 32px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(133, 133, 133);
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button-normal:hover {
+  color: black; /* 호버 시 색상 변경 */
+}
+
+.button-active {
+  width: 230px;
+  height: 50px;
+  background-color: #373737;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryBold";
+  font-size: 32px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(223, 223, 223);
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Text field */
+
+.button-text-field {
+  position: absolute;
+  top: 650px;
+  left: 45px;
+  display: flex;
+  align-items: center;
+}
+
+.button-text-field button {
+  margin: 10px;
+}
+
+/* Draw field */
+.button-draw-field {
+  position: absolute;
+  top: 740px;
+  left: 45px;
+  display: flex;
+  align-items: center;
+}
+
+.draw-container {
+  width: 730px;
+  height: 50px;
+  margin-left: 15px;
+  border-radius: 50px;
+  background-color: #eeeeee;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.button-color {
+  position: relative;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  border: 0px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.button-color.red {
+  margin-left: 20px;
+  background-color: red;
+}
+
+.button-color.orange {
+  background-color: orange;
+}
+
+.button-color.yellow {
+  background-color: yellow;
+}
+
+.button-color.green {
+  background-color: green;
+}
+
+.button-color.skyblue {
+  background-color: skyblue;
+}
+
+.button-color.blue {
+  background-color: blue;
+}
+
+.button-color.purple {
+  background-color: purple;
+}
+
+.button-color.black {
+  background-color: black;
+}
+
+.button-color-rainbow {
+  margin: 10px;
+  border-radius: 50%; /* 원형 */
+  width: 30px; /* 너비 */
+  height: 30px; /* 높이 */
+  border: none; /* 테두리 없음 */
+  cursor: pointer; /* 커서 변경 */
+  background-image: conic-gradient(
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  ); /* 무지개 색상 그래디언트 */
+}
+
+.button-line-width {
+  transform: translateY(-5px);
+  margin-left: 15px;
+  width: 170px;
+}
+
+.button-erase {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+/* Image field */
+.button-image-field {
+  position: absolute;
+  top: 820px;
+  left: 45px;
+  display: flex;
+  align-items: center;
+}
+
+.button-imageUpload-normal {
+  margin-left: 11px;
+  margin-right: 9px;
+  width: 230px;
+  height: 50px;
+  background-color: #eeeeee;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryBold";
+
+  font-size: 32px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(133, 133, 133);
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button-imageUpload-normal:hover {
+  color: black; /* 호버 시 색상 변경 */
+}
+
+.button-imageUpload-active {
+  margin-left: 11px;
+  margin-right: 9px;
+  width: 230px;
+  height: 50px;
+  background-color: #373737;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryBold";
+  font-size: 32px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(223, 223, 223);
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button-imageUpload-done {
+  width: 80px;
+  height: 40px;
+  margin-right: 10px;
+  background-color: #5886da;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(238, 238, 238);
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  transform: translateY(-10px);
+}
+
+.button-imageUpload-done:hover {
+  background-color: #4a70b6;
+}
+
+.button-imageUpload-cancel {
+  width: 80px;
+  height: 40px;
+  background-color: #da5858;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(238, 238, 238);
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  transform: translateY(-10px);
+}
+
+.button-imageUpload-cancel:hover {
+  background-color: #bd4e4e;
+}
+
+.basic-image-modal {
+  position: fixed;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 620px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+}
+
+.basic-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.basic-category-button {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: white;
+  width: 100px;
+  height: 45px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border: none;
+  background-color: rgb(145, 145, 145);
+  cursor: pointer;
+  transition: background-color ease-in-out 0.2s;
+}
+
+.basic-category-button-active {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: white;
+  width: 100px;
+  height: 45px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border: none;
+  background-color: #78a2ee;
+  cursor: pointer;
+  transition: background-color ease-in-out 0.2s;
+}
+
+.basic-image-gallery {
+  padding: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.basic-image-item {
+  cursor: pointer;
+  width: 150px;
+  height: auto;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.basic-image-item img {
+  width: 150px;
+  height: auto;
+}
+
+.basic-close-button {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 52px;
+  color: #797979;
+  cursor: pointer;
+}
+
+.basic-close-button:hover {
+  color: black;
+}
+
+.aisketch-image-modal {
+  position: fixed;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 580px;
+  height: 320px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+}
+
+.aisketch-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.aisketch-input {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+}
+
+.aisketch-submit {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100px;
+  height: 50px;
+  background-color: #3771dd;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  cursor: pointer;
+}
+
+.aisketch-close-button {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: #797979;
+  cursor: pointer;
+}
+
+.aisketch-close-button:hover {
+  color: black;
+}
+
+/* AI field */
+
+.button-ai-field {
+  position: absolute;
+  top: 120px;
+  left: 1120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-field-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.ai-info {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  flex-grow: 1;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.ai-able {
+  line-height: 50px;
+  text-align: center;
+  width: 110px;
+  height: 50px;
+  margin: 10px;
+  background-color: rgb(22, 111, 245);
+  border: 0px;
+  border-radius: 50px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(228, 228, 228);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-disabled {
+  line-height: 50px;
+  text-align: center;
+  width: 110px;
+  height: 50px;
+  margin: 10px;
+  background-color: #4b4b4b;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryLight";
+  font-size: 24px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(228, 228, 228);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: no-drop;
+}
+
+.button-ai {
+  line-height: 50px;
+  text-align: center;
+  width: 110px;
+  height: 50px;
+  margin: 10px;
+  background-color: #0d6819;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryLight";
+  font-size: 24px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(228, 228, 228);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.button-ai-active {
+  line-height: 50px;
+  text-align: center;
+  width: 110px;
+  height: 50px;
+  margin: 10px;
+  background-color: rgb(22, 111, 245);
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryLight";
+  font-size: 24px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(228, 228, 228);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* side field */
+.side-deco-line {
+  width: 360px;
+  height: 1px;
+  background-color: rgb(218, 218, 218);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.button-side-field {
+  position: absolute;
+  top: 390px;
+  left: 1120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-side-field button:hover {
+  color: black;
+}
+
+.side-field-info {
+  margin-left: 15px;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.side-page-info {
+  width: 150px;
+  margin: 10px;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.button-page-del {
+  width: 150px;
+  height: 50px;
+  margin: 10px;
+  background-color: #eeeeee;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryLight";
+  font-size: 26px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(133, 133, 133);
+  cursor: pointer;
+}
+
+.button-page-move {
+  margin: 10px;
+  width: 150px;
+  height: 50px;
+  background-color: #eeeeee;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryLight";
+  font-size: 26px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(133, 133, 133);
+  cursor: pointer;
+}
+
+.side-submit-container {
+  margin-top: 10px;
+}
+
+.button-page-submit {
+  margin: 10px;
+  width: 320px;
+  height: 50px;
+  background-color: #ffd965;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryBold";
+  font-weight: 500;
+  font-size: 28px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(133, 133, 133);
+  cursor: pointer;
+}
+
+/* help button */
+.help-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border: 2px solid rgb(182, 182, 182);
+  border-radius: 50%;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  color: rgb(44, 44, 44);
+  cursor: pointer;
+}
+
+.help-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.help-modal {
+  position: relative;
+  background-color: white;
+  width: 1000px;
+  height: 610px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.help-modal-close {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: -5px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 52px;
+  color: #797979;
+  cursor: pointer;
+}
+
+.help-modal-close:hover {
+  color: rgb(0, 0, 0);
+}
+
+.help-button-chapter {
+  margin: 10px;
+  width: 150px;
+  height: 50px;
+  background-color: #eeeeee;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryLight";
+  font-size: 26px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(133, 133, 133);
+  cursor: pointer;
+}
+
+.help-button-chapter-active {
+  margin: 10px;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(144, 212, 138);
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryLight";
+  font-size: 26px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(10, 10, 10);
+  cursor: pointer;
+}
+
+.help-button-sub {
+  margin: 10px;
+  width: 150px;
+  height: 50px;
+  background-color: #eeeeee;
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryLight";
+  font-size: 26px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(133, 133, 133);
+  cursor: pointer;
+}
+
+.help-button-sub-active {
+  margin: 10px;
+  width: 150px;
+  height: 50px;
+  background-color: rgb(144, 212, 138);
+  border: 0px;
+  border-radius: 50px;
+  font-family: "MaplestoryLight";
+  font-size: 26px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(10, 10, 10);
+  cursor: pointer;
+}
+
+.help-deco-line {
+  margin-top: 5px;
+  width: 95%;
+  height: 1px;
+  background-color: rgb(187, 187, 187);
+}
+
+.help-content-text {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  margin-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.help-content-image {
+  border: 1px solid rgb(196, 196, 196);
+  width: 650px;
+  margin-left: 10px;
+}
+
+/* screenshot overlay field */
+.submit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.submit-modal {
+  position: relative;
+  background-color: white;
+  width: 1000px;
+  height: 620px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+}
+
+.submit-title {
+  position: absolute;
+  left: 50%;
+  top: 450px;
+  width: 450px;
+  height: 50px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  border: 3px solid rgb(187, 187, 187);
+}
+
+.submit-author {
+  position: absolute;
+  left: 50%;
+  top: 530px;
+  width: 450px;
+  height: 50px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  border: 3px solid rgb(187, 187, 187);
+}
+
+.submit-button-finish {
+  position: absolute;
+  left: 870px;
+  top: 595px;
+  width: 110px;
+  height: 50px;
+  background-color: rgb(22, 111, 245);
+  border: 0px;
+  border-radius: 50px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: rgb(228, 228, 228);
+  cursor: pointer;
+}
+
+.submit-button-finish:hover {
+  background-color: rgb(18, 91, 199);
+}
+
+.submit-canvas {
+  position: absolute;
+  left: 50px;
+  top: 70px;
+  border: 1px solid black;
+  width: 384px;
+  height: 512px;
+  border: 3px solid rgb(187, 187, 187);
+}
+
+.submit-cover-info {
+  position: absolute;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  left: 50px;
+  top: 20px;
+  color: rgb(54, 54, 54);
+}
+
+.button-submit-container {
+  position: absolute;
+  left: 50%;
+  top: 60px;
+}
+
+.submit-line-width {
+  position: absolute;
+  top: 130px;
+  left: 50%;
+  width: 450px;
+}
