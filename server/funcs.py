@@ -46,7 +46,7 @@ def stringToRGB(base64_string):
     return cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
 
 def generate_lineart(keyword):
-    f = open("/Users/iyonghyeon/Documents/cap/config.txt", 'r')
+    f = open("/home/ubuntu/config.txt", 'r')
     f.readline()
     endpoint = f.readline().strip()
     
@@ -183,7 +183,7 @@ def storyToBackground_prompt(stories):
 
 
 def openai_api(prompt, model_name):
-    f = open("/Users/iyonghyeon/Documents/cap/config.txt", 'r')
+    f = open("/home/ubuntu/config.txt", 'r')
     api_key = f.readline().strip()
 
     openai.api_key = api_key #api key 입력해야 함
@@ -219,7 +219,7 @@ def story_generate(dto_json, len_sentence):
     return refined_response
 
 def background_generate(refined_response):
-    f = open("/Users/iyonghyeon/Documents/cap/config.txt", 'r')
+    f = open("/home/ubuntu/config.txt", 'r')
     f.readline()
     endpoint = f.readline().strip()
 
