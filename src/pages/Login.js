@@ -23,17 +23,17 @@ const Login = () => {
     e.preventDefault();
 
     //더미
+    /*
     const isLogin = "True";
     const Id = "4";
     const userName = "seung";
     const userProfileImage = "2";
     login({ userProfileImage, Id, userName, isLogin: true });
     navigate("/");
-
-    /*
+*/
 
     try {
-      const response = await axios.post("http://localhost:8082/auth/login", {
+      const response = await axios.post("http://13.124.203.82:8082/auth/login", {
         userId,
         userPassword,
       },{withCredentials:true});
@@ -51,7 +51,7 @@ const Login = () => {
     } catch (error) {
       console.error("로그인 요청 실패", error);
     }
-    */
+    
   };
 
   return (

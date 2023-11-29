@@ -74,7 +74,7 @@ function MakeText({
         try {
           setIsLoadingPost(1);
           const response = await axios.post(
-            "http://127.0.0.1:5000/storyMaking",
+            "http://13.124.203.82:5000/storyMaking",
             jsonData
           );
           setStoryResponseData(response);

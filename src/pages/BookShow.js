@@ -16,7 +16,7 @@ function BookShow() {
     async function sendGetRequest() {
       try {
         //실제
-        const response = await axios.get(`http://localhost:8082/books/${id}` ,{withCredentials:true});
+        const response = await axios.get(`http://13.124.203.82:8082/books/${id}` ,{withCredentials:true});
         setDataTitle(response.data.title);
         //더미
         //const response = await axios.get("/bookdummy_new.json");
@@ -109,7 +109,7 @@ function BookShow() {
 
   const handleDeleteBook = async (bookId) => {
     try {
-      await axios.delete(`http://localhost:8082/books/delete/${bookId}`,{withCredentials:true});
+      await axios.delete(`http://13.124.203.82:8082/books/delete/${bookId}`,{withCredentials:true});
       navigate("/Mine");
     } catch (error) {
       if (error.response && error.response.status === 403) {
@@ -122,7 +122,7 @@ function BookShow() {
     const handleDownloadPdf = async () => {
       try {
         const response = await axios({
-          url: `http://localhost:8082/books/${bookId}/pdf`,
+          url: `http://13.124.203.82:8082/books/${bookId}/pdf`,
           method: "GET",
           responseType: "blob",
         }, {withCredentials:true}

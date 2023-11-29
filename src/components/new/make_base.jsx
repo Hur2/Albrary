@@ -13,7 +13,7 @@ function MakeBase({ setPhase, setProgress, setBaseResponseData }) {
   useEffect(() => {
     async function sendGetRequest() {
       try {
-        const response = await axios.get("http://127.0.0.1:5000/initQuest");
+        const response = await axios.get("http://13.124.203.82:5000/initQuest");
         //const response = await axios.get("base_data.json");
         const data = response.data;
 
@@ -60,7 +60,7 @@ function MakeBase({ setPhase, setProgress, setBaseResponseData }) {
         try {
           setIsLoadingPost(true);
           const response = await axios.post(
-            "http://127.0.0.1:5000/questionMaking",
+            "http://13.124.203.82:5000/questionMaking",
             jsonData
           );
           setBaseResponseData(response);

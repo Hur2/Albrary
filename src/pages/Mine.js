@@ -19,7 +19,7 @@ function Mine() {
         //실제
 
         const response = await axios.get(
-          "http://localhost:8082/books/mine_book_list"
+          "http://13.124.203.82:8082/books/mine_book_list"
           ,{withCredentials:true});
 
         //더미

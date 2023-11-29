@@ -694,7 +694,7 @@ function MakeFairytaleWithAi({ setPhase, setProgress, storyResponseData }) {
 
     const handleAiSketchSend = async () => {
       try {
-        const response = await axios.post("http://127.0.0.1:5000/makeLineart", {
+        const response = await axios.post("http://13.124.203.82:5000/makeLineart", {
           keyword: inputText,
         });
         if (response.data && response.data.image) {
@@ -795,7 +795,7 @@ function MakeFairytaleWithAi({ setPhase, setProgress, storyResponseData }) {
           setIsUploadTodb(1);
           //실제
           const response = await axios.post(
-            "http://localhost:8082/books",
+            "http://13.124.203.82:8082/books",
             postJsonData
             ,{withCredentials:true}
           );
