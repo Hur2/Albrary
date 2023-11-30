@@ -188,10 +188,12 @@ function ContentHelp({ chapter, page }) {
     } else if (page === 2) {
       return (
         <div className="help-content-container">
-          <div className="help-content-text">도움말넣기.</div>
+          <div className="help-content-text">
+            원하는 그림을 써서 보내면 그림을 그려줘요.
+          </div>
           <img
             className="help-content-image"
-            src="img/help/help_imagebasic.gif"
+            src="img/help/help_aisketch.gif"
             alt="help"
           />
         </div>

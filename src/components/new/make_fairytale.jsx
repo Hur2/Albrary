@@ -4,6 +4,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import HelpButton from "./make_helpbutton";
 import html2canvas from "html2canvas";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../../styles/MakeFairytale.css";
 
 const DraggableText = ({ id, text, style, mode, onEdit, onDelete }) => {
@@ -89,6 +90,20 @@ const DrawingCanvas = React.forwardRef(
   ({ width, height, color, lineWidth, mode }, ref) => {
     const [isDrawing, setIsDrawing] = useState(false);
 
+    const preventScroll = (e) => {
+      if (isDrawing) {
+        e.preventDefault();
+      }
+    };
+
+    useEffect(() => {
+      document.addEventListener("touchmove", preventScroll, { passive: false });
+
+      return () => {
+        document.removeEventListener("touchmove", preventScroll);
+      };
+    }, [isDrawing]);
+
     useEffect(() => {
       const context = ref.current.getContext("2d");
 
@@ -126,7 +141,7 @@ const DrawingCanvas = React.forwardRef(
     const getCoordinates = (nativeEvent) => {
       if (nativeEvent.touches && nativeEvent.touches.length > 0) {
         const touch = nativeEvent.touches[0];
-        return { offsetX: touch.clientX, offsetY: touch.clientY };
+        return { offsetX: touch.clientX - 50, offsetY: touch.clientY - 110 };
       }
       return { offsetX: nativeEvent.offsetX, offsetY: nativeEvent.offsetY };
     };
@@ -159,6 +174,7 @@ const ItemType = {
   RESIZE: "resize",
 };
 
+// 이미지 드래그
 const DraggableImage = ({
   src,
   position,
@@ -172,32 +188,38 @@ const DraggableImage = ({
     item: { type: ItemType.IMAGE },
   }));
 
-  // 드래그 동안의 크기 조절을 처리하는 함수
   const handleResizing = useCallback(
     (e) => {
-      // 새로운 크기 계산
-      const newWidth = e.clientX - position.x;
-      const newHeight = e.clientY - position.y;
+      const clientX = e.type.includes("touch")
+        ? e.touches[0].clientX - 50
+        : e.clientX;
+      const clientY = e.type.includes("touch")
+        ? e.touches[0].clientY - 110
+        : e.clientY;
+
+      const newWidth = clientX - position.x;
+      const newHeight = clientY - position.y;
       onResize({ width: newWidth, height: newHeight });
     },
     [position, onResize]
   );
 
-  // 드래그 시작을 처리하는 함수
   const startResizing = useCallback(
     (e) => {
-      // 드래그 이벤트를 활성화
       e.preventDefault();
       window.addEventListener("mousemove", handleResizing);
       window.addEventListener("mouseup", stopResizing);
+      window.addEventListener("touchmove", handleResizing, { passive: false });
+      window.addEventListener("touchend", stopResizing);
     },
     [handleResizing]
   );
 
-  // 드래그 종료를 처리하는 함수
   const stopResizing = useCallback(() => {
     window.removeEventListener("mousemove", handleResizing);
     window.removeEventListener("mouseup", stopResizing);
+    window.removeEventListener("touchmove", handleResizing);
+    window.removeEventListener("touchend", stopResizing);
   }, [handleResizing]);
 
   return (
@@ -237,6 +259,7 @@ const DraggableImage = ({
           zIndex: "100",
         }}
         onMouseDown={startResizing} // 크기 조절 시작
+        onTouchStart={startResizing}
       />
     </div>
   );
@@ -398,6 +421,7 @@ function MakeFairytale({ setPhase }) {
   };
 
   const handleShowSubmitModal = () => {
+    saveCanvasImage();
     setShowSubmitModal(true);
     takeScreenshots();
   };
@@ -560,7 +584,23 @@ function MakeFairytale({ setPhase }) {
         "fruit/peach.png",
         "fruit/plum.png",
       ],
-      동물: ["image_0.png", "cat.png"],
+      동물: [
+        "animal/0.png",
+        "animal/1.png",
+        "animal/2.png",
+        "animal/3.png",
+        "animal/4.png",
+        "animal/5.png",
+        "animal/6.png",
+        "animal/7.png",
+        "animal/8.png",
+        "animal/9.png",
+        "animal/10.png",
+        "animal/11.png",
+        "animal/12.png",
+        "animal/13.png",
+        "animal/14.png",
+      ],
       나무: [
         "tree/0.png",
         "tree/1.png",
@@ -595,8 +635,40 @@ function MakeFairytale({ setPhase }) {
         "flower/13.png",
         "flower/14.png",
       ],
-      사람: ["person1.png", "person2.png"],
-      말풍선: [],
+      사람: [
+        "people/0.png",
+        "people/1.png",
+        "people/2.png",
+        "people/3.png",
+        "people/4.png",
+        "people/5.png",
+        "people/6.png",
+        "people/7.png",
+        "people/8.png",
+        "people/9.png",
+        "people/10.png",
+        "people/11.png",
+        "people/12.png",
+        "people/13.png",
+        "people/14.png",
+      ],
+      말풍선: [
+        "speechballon/0.png",
+        "speechballon/1.png",
+        "speechballon/2.png",
+        "speechballon/3.png",
+        "speechballon/12.png",
+        "speechballon/4.png",
+        "speechballon/5.png",
+        "speechballon/6.png",
+        "speechballon/7.png",
+        "speechballon/13.png",
+        "speechballon/8.png",
+        "speechballon/9.png",
+        "speechballon/10.png",
+        "speechballon/11.png",
+        "speechballon/14.png",
+      ],
     };
 
     return (
@@ -655,9 +727,12 @@ function MakeFairytale({ setPhase }) {
 
     const handleAiSketchSend = async () => {
       try {
-        const response = await axios.post("http://13.124.203.82:5000/makeLineart", {
-          keyword: inputText,
-        });
+        const response = await axios.post(
+          "http://13.124.203.82:5000/makeLineart",
+          {
+            keyword: inputText,
+          }
+        );
         if (response.data && response.data.image) {
           const tempAiSketchImage =
             "data:image/png;base64," + response.data.image;
@@ -736,6 +811,8 @@ function MakeFairytale({ setPhase }) {
   }
 
   const [isUploadTodb, setIsUploadTodb] = useState(0);
+  const navigate = useNavigate();
+
   const handleSubmit = () => {
     if (isTakingScreenshot === true) {
       const pagesData = base64Images.map((imgData) => ({
@@ -760,7 +837,7 @@ function MakeFairytale({ setPhase }) {
             postJsonData,
             { withCredentials: true }
           );
-          setPhase(6);
+          navigate("/Mine");
         } catch (error) {
           console.log(error);
         }
@@ -771,7 +848,6 @@ function MakeFairytale({ setPhase }) {
       }
 
       setShowSubmitModal(false);
-      setPhase(6);
     }
   };
   //cover canvas
@@ -779,6 +855,7 @@ function MakeFairytale({ setPhase }) {
   const [isDrawing, setIsDrawing] = useState(false);
   const [submitColor, setSubmitColor] = useState("black");
   const [submitLineWidth, setSubmitLineWidth] = useState(10);
+  const [submitMode, setSubmitMode] = useState("draw");
 
   const handleMouseDown = (e) => {
     const canvas = canvasSubmitRef.current;
@@ -792,8 +869,15 @@ function MakeFairytale({ setPhase }) {
     if (!isDrawing) return;
     const canvas = canvasSubmitRef.current;
     const ctx = canvas.getContext("2d");
-    ctx.strokeStyle = submitColor;
-    ctx.lineWidth = submitLineWidth;
+    if (submitMode === "erase") {
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.lineWidth = submitLineWidth;
+    } else {
+      ctx.globalCompositeOperation = "source-over";
+      ctx.strokeStyle = submitColor;
+      ctx.lineWidth = submitLineWidth;
+      ctx.lineCap = "round";
+    }
     ctx.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
     ctx.stroke();
   };
@@ -809,6 +893,7 @@ function MakeFairytale({ setPhase }) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.strokeStyle = submitColor;
     ctx.lineWidth = submitLineWidth;
+    ctx.lineCap = "round";
   };
 
   useEffect(() => {
@@ -826,7 +911,7 @@ function MakeFairytale({ setPhase }) {
             <div className="submit-canvas">
               <canvas
                 ref={canvasSubmitRef}
-                width="344"
+                width="384"
                 height="512"
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
@@ -837,35 +922,73 @@ function MakeFairytale({ setPhase }) {
             <div className="button-submit-container">
               <button
                 className="button-color red"
-                onClick={() => setSubmitColor("red")}
+                onClick={() => {
+                  setSubmitMode("draw");
+                  setSubmitColor("red");
+                }}
               />
               <button
                 className="button-color orange"
-                onClick={() => setSubmitColor("orange")}
+                onClick={() => {
+                  setSubmitMode("draw");
+                  setSubmitColor("orange");
+                }}
               />
               <button
                 className="button-color yellow"
-                onClick={() => setSubmitColor("yellow")}
+                onClick={() => {
+                  setSubmitMode("draw");
+                  setSubmitColor("yellow");
+                }}
               />
               <button
                 className="button-color green"
-                onClick={() => setSubmitColor("green")}
+                onClick={() => {
+                  setSubmitMode("draw");
+                  setSubmitColor("green");
+                }}
               />
               <button
                 className="button-color skyblue"
-                onClick={() => setSubmitColor("skyblue")}
+                onClick={() => {
+                  setSubmitMode("draw");
+                  setSubmitColor("skyblue");
+                }}
               />
               <button
                 className="button-color blue"
-                onClick={() => setSubmitColor("blue")}
+                onClick={() => {
+                  setSubmitMode("draw");
+                  setSubmitColor("blue");
+                }}
               />
               <button
                 className="button-color purple"
-                onClick={() => setSubmitColor("purple")}
+                onClick={() => {
+                  setSubmitMode("draw");
+                  setSubmitColor("purple");
+                }}
               />
               <button
                 className="button-color black"
-                onClick={() => setSubmitColor("black")}
+                onClick={() => {
+                  setSubmitMode("draw");
+                  setSubmitColor("black");
+                }}
+              />
+              <button
+                className="button-color-rainbow"
+                onClick={() => {
+                  setSubmitMode("draw");
+                  openColorSelect();
+                }}
+              ></button>
+              <input
+                ref={colorRef}
+                type="color"
+                value={color}
+                onChange={(e) => setSubmitColor(e.target.value)}
+                style={{ display: "none" }}
               />
             </div>
             <input
@@ -876,7 +999,17 @@ function MakeFairytale({ setPhase }) {
               value={submitLineWidth}
               onChange={(e) => setSubmitLineWidth(e.target.value)}
             />
-
+            <img
+              className="submit-button-erase"
+              src={
+                submitMode === "erase"
+                  ? "img/make_icon_erase_active.png"
+                  : "img/make_icon_erase.png"
+              }
+              alt="icon-erase"
+              onClick={() => setSubmitMode("erase")}
+              draggable="false"
+            ></img>
             <input
               className="submit-title"
               type="text"

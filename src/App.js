@@ -13,20 +13,22 @@ import "./App.css";
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
-        <Menu />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/make" element={<Make />} />
-          <Route path="/mine" element={<Mine />} />
-          <Route path="/BookShow/:id" element={<BookShow />} />
-          <Route path="/everyone" element={<Everyone />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </AuthProvider>
-    </Router>
+    <div className="App">
+      <Router>
+        <AuthProvider>
+          <Menu />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/make" element={<Make />} />
+            <Route path="/mine" element={<Mine />} />
+            <Route path="/BookShow/:id" element={<BookShow />} />
+            <Route path="/everyone" element={<Everyone />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </AuthProvider>
+      </Router>
+    </div>
   );
 }
 

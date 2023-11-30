@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function MakeFinish({ setPhase, setProgress }) {
   const [nowFadeState, setFadeState] = useState(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
@@ -16,6 +19,7 @@ function MakeFinish({ setPhase, setProgress }) {
   useEffect(() => {
     const timeOut = setTimeout(() => {
       setPhase(7);
+      navigate("/Mine");
     }, 5000);
 
     return () => {

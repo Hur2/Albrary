@@ -1,23 +1,18 @@
-.front-container h1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center; /* 수평 가운데 정렬 */
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: 64px;
-  margin-top: 100px;
-  animation: floatUp 1.5s ease-in-out 1;
+.front-container {
+  height: calc(100vh - 60px);
+  overflow: hidden;
 }
 
-.front-container h2 {
+.front-title {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center; /* 수평 가운데 정렬 */
+  text-align: center;
   font-family: "Noto Sans KR", sans-serif;
-  font-size: 44px;
+  font-weight: 700;
+  font-size: 68px;
+  margin-top: 100px;
   animation: floatUp 1.5s ease-in-out 1;
 }
 
@@ -32,6 +27,145 @@
   }
 }
 
-.imgtest {
-  border: 1px solid red;
+@keyframes floatUp2 {
+  0% {
+    transform: translateY(150%);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.front-portal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  animation: floatUp2 1.5s ease-in-out 1;
+  margin-top: 100px;
+}
+
+.front-portal-container {
+  width: 380px;
+  margin: 75px;
+}
+
+.front-portal-title {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 44px;
+  font-weight: 500;
+}
+
+.front-portal-info {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 32px;
+  font-weight: 300;
+}
+
+.front-portal-button-make {
+  background-image: linear-gradient(to bottom right, #ffb413, rgb(39, 161, 58));
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 25px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-image 3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  color: white;
+  text-decoration: none;
+}
+
+.front-portal-button-make:hover {
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(255, 196, 0),
+    rgb(89, 160, 22)
+  );
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.front-portal-button-mine {
+  background-image: linear-gradient(to bottom right, #13ffd8, rgb(39, 57, 161));
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 25px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-image 3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  color: white;
+  text-decoration: none;
+}
+
+.front-portal-button-mine:hover {
+  background-image: linear-gradient(to bottom right, #4efcdf, rgb(61, 81, 194));
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.front-portal-button-every {
+  background-image: linear-gradient(
+    to bottom right,
+    #13c8ff,
+    rgb(132, 39, 161)
+  );
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 25px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-image 3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: 32px;
+  color: white;
+  text-decoration: none;
+}
+
+.front-portal-button-every:hover {
+  background-image: linear-gradient(
+    to bottom right,
+    #48d4ff,
+    rgb(164, 54, 197)
+  );
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.front-deco-line {
+  width: 1px;
+  height: 370px;
+  border-left: 1px solid rgb(206, 206, 206);
+  transform: translateY(25px);
+}
+
+.front-footer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+
+  color: gray;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 200;
+  font-size: 16px;
 }
