@@ -43,7 +43,7 @@ def stringToRGB(base64_string):
     imgdata = base64.b64decode(base64_string)
     dataBytesIO = io.BytesIO(imgdata)
     image = Image.open(dataBytesIO)
-    return cv2.cvtColor(np.array(image), cv2.COLOR_BGR2RGB)
+    return image
 
 def generate_lineart(keyword):
     f = open("/home/ubuntu/config.txt", 'r')
@@ -62,12 +62,31 @@ def generate_lineart(keyword):
     response = requests.post(url=f'{endpoint}/sdapi/v1/txt2img', json=payload)
     r = response.json()
     image = stringToRGB(r['images'][0])
-    image = cv2.resize(image, dsize=(256, 256), interpolation=cv2.INTER_LANCZOS4)
-    image = remove(image)
+    img_resize_lanczos = image.resize((256, 256), Image.LANCZOS)
 
-    image = cv2.imencode('.png', image)
-    base64_string = base64.b64encode(image[1]).decode()
+    imgByteArr = io.BytesIO()
+    img_resize_lanczos.save(imgByteArr, format=img_resize_lanczos.format)
+    imgByteArr = imgByteArr.getvalue()
+    image_file_object = imgByteArr
 
+    r = requests.post('https://clipdrop-api.co/remove-background/v1',
+                      files={
+                          'image_file': ('portrait.jpg', image_file_object, 'image/jpeg'),
+                      },
+                      headers={
+                          'x-api-key': '1b8fb6c83ab1a0c1ea03492fd6cc940606aba7ee728fa31a560eb4a36eb850090a8fc09a36b9d90e1d185ad828db0cc2'}
+                      )
+    base64_string = 0
+    if (r.ok):
+        image_n = Image.open(io.BytesIO(r.content))
+        base64_string = base64.b64encode(image_n.read())
+    else:
+        r.raise_for_status()
+        return 0
+    #image = cv2.resize(image, dsize=(256, 256), interpolation=cv2.INTER_LANCZOS4)
+    #image = remove(image)
+    #image = cv2.imencode('.png', image)
+    #base64_string = base64.b64encode(image[1]).decode()
     return base64_string
 
 
