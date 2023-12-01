@@ -420,7 +420,6 @@ function MakeFairytaleWithAi({ setPhase, setProgress, storyResponseData }) {
   };
 
   const deleteText = (id) => {
-    console.log(uploadedImage);
     setPages((pages) =>
       pages.map((texts, pageIndex) =>
         pageIndex === currentPage
@@ -465,7 +464,6 @@ function MakeFairytaleWithAi({ setPhase, setProgress, storyResponseData }) {
       base64Images.push(canvas.toDataURL("image/png"));
     }
 
-    console.log(base64Images);
     setIsTakingScreenshot(true);
   };
 
@@ -655,10 +653,96 @@ function MakeFairytaleWithAi({ setPhase, setProgress, storyResponseData }) {
         "fruit/pineapple.png",
         "fruit/strawberry.png",
         "fruit/watermelon.png",
+        "fruit/grape.png",
+        "fruit/mandarin.png",
+        "fruit/peach.png",
+        "fruit/plum.png",
       ],
-      동물: ["image_0.png", "cat.png"],
-      식물: ["image_1.png", "flower.png"],
-      인물: ["person1.png", "person2.png"],
+      동물: [
+        "animal/0.png",
+        "animal/1.png",
+        "animal/2.png",
+        "animal/3.png",
+        "animal/4.png",
+        "animal/5.png",
+        "animal/6.png",
+        "animal/7.png",
+        "animal/8.png",
+        "animal/9.png",
+        "animal/10.png",
+        "animal/11.png",
+        "animal/12.png",
+        "animal/13.png",
+        "animal/14.png",
+      ],
+      나무: [
+        "tree/0.png",
+        "tree/1.png",
+        "tree/2.png",
+        "tree/3.png",
+        "tree/4.png",
+        "tree/5.png",
+        "tree/6.png",
+        "tree/7.png",
+        "tree/8.png",
+        "tree/9.png",
+        "tree/10.png",
+        "tree/11.png",
+        "tree/12.png",
+        "tree/13.png",
+        "tree/14.png",
+      ],
+      꽃: [
+        "flower/0.png",
+        "flower/1.png",
+        "flower/2.png",
+        "flower/3.png",
+        "flower/4.png",
+        "flower/5.png",
+        "flower/6.png",
+        "flower/7.png",
+        "flower/8.png",
+        "flower/9.png",
+        "flower/10.png",
+        "flower/11.png",
+        "flower/12.png",
+        "flower/13.png",
+        "flower/14.png",
+      ],
+      사람: [
+        "people/0.png",
+        "people/1.png",
+        "people/2.png",
+        "people/3.png",
+        "people/4.png",
+        "people/5.png",
+        "people/6.png",
+        "people/7.png",
+        "people/8.png",
+        "people/9.png",
+        "people/10.png",
+        "people/11.png",
+        "people/12.png",
+        "people/13.png",
+        "people/14.png",
+      ],
+      말풍선: [
+        "speechballon/0.png",
+        "speechballon/1.png",
+        "speechballon/2.png",
+        "speechballon/3.png",
+        "speechballon/12.png",
+        "speechballon/4.png",
+        "speechballon/5.png",
+        "speechballon/6.png",
+        "speechballon/7.png",
+        "speechballon/13.png",
+        "speechballon/8.png",
+        "speechballon/9.png",
+        "speechballon/10.png",
+        "speechballon/11.png",
+        "speechballon/14.png",
+      ],
     };
 
     return (
@@ -807,7 +891,17 @@ function MakeFairytaleWithAi({ setPhase, setProgress, storyResponseData }) {
       }));
 
       const canvasSub = canvasSubmitRef.current;
-      const cover_image = removePrefix(canvasSub.toDataURL("image/png"));
+
+      // 흰 사각형 채워넣기
+      const newCanvas = document.createElement("canvas");
+      newCanvas.width = canvasSub.width;
+      newCanvas.height = canvasSub.height;
+      const ctx = newCanvas.getContext("2d");
+      ctx.fillStyle = "#FFFFFF";
+      ctx.fillRect(0, 0, newCanvas.width, newCanvas.height);
+      ctx.drawImage(canvasSub, 0, 0);
+
+      const cover_image = removePrefix(newCanvas.toDataURL("image/png"));
 
       const postJsonData = {
         cover_image: cover_image,
@@ -815,7 +909,6 @@ function MakeFairytaleWithAi({ setPhase, setProgress, storyResponseData }) {
         author: author,
         pages: pagesData,
       };
-      console.log(postJsonData);
       async function sendPostRequest() {
         try {
           setIsUploadTodb(1);
@@ -825,7 +918,6 @@ function MakeFairytaleWithAi({ setPhase, setProgress, storyResponseData }) {
             postJsonData,
             { withCredentials: true }
           );
-          console.log(postJsonData);
           setPhase(6);
         } catch (error) {
           console.log(error);

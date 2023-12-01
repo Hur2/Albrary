@@ -371,7 +371,6 @@ function MakeFairytale({ setPhase }) {
   };
 
   const deleteText = (id) => {
-    console.log(uploadedImage);
     setPages((pages) =>
       pages.map((texts, pageIndex) =>
         pageIndex === currentPage
@@ -416,7 +415,6 @@ function MakeFairytale({ setPhase }) {
       base64Images.push(canvas.toDataURL("image/png"));
     }
 
-    console.log(base64Images);
     setIsTakingScreenshot(true);
   };
 
@@ -736,7 +734,6 @@ function MakeFairytale({ setPhase }) {
         if (response.data && response.data.image) {
           const tempAiSketchImage =
             "data:image/png;base64," + response.data.image;
-          console.log(tempAiSketchImage);
           handleAiSketchSelect(tempAiSketchImage);
         }
       } catch (error) {
@@ -820,8 +817,18 @@ function MakeFairytale({ setPhase }) {
       }));
 
       const canvasSub = canvasSubmitRef.current;
-      const cover_image = removePrefix(canvasSub.toDataURL("image/png"));
-      console.log(cover_image);
+
+      // 흰 사각형 채워넣기
+      const newCanvas = document.createElement("canvas");
+      newCanvas.width = canvasSub.width;
+      newCanvas.height = canvasSub.height;
+      const ctx = newCanvas.getContext("2d");
+      ctx.fillStyle = "#FFFFFF";
+      ctx.fillRect(0, 0, newCanvas.width, newCanvas.height);
+      ctx.drawImage(canvasSub, 0, 0);
+
+      const cover_image = removePrefix(newCanvas.toDataURL("image/png"));
+
       const postJsonData = {
         cover_image: cover_image,
         title: title,
