@@ -12,7 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/registration")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://13.124.203.82")
 public class RegistrationController {
 
     private final UserRepository userRepository;
@@ -23,7 +23,7 @@ public class RegistrationController {
     }
 
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://13.124.203.82")
     public ResponseEntity<Map<String, String>> registerUser(@RequestBody UserEntity newUser) {
         Map<String, String> response = new HashMap<>();
 

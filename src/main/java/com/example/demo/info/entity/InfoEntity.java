@@ -15,10 +15,10 @@ public class InfoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100, nullable = false) // 이름
+    @Column(length = 100, nullable = false) // 질문
     private String question;
 
-    @Column(length = 100, nullable = false) // 이름
+    @Column(length = 100, nullable = false) // 답변
     private String answer;
 
     public InfoEntity(){}

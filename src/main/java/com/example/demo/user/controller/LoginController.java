@@ -12,7 +12,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://13.124.203.82")
 public class LoginController {
 
     private final UserRepository userRepository;
@@ -26,7 +26,7 @@ public class LoginController {
 
     //로그인
     @PostMapping("/login")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://13.124.203.82")
     //@CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody UserEntity user) {
         Optional<UserEntity> foundUser = userRepository.findByUserId(user.getUserId());
@@ -61,9 +61,9 @@ public class LoginController {
     }
 
     @PostMapping("/logout")
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://13.124.203.82")
     public ResponseEntity<Map<String, String>> logoutUser() {
-        // 세션에서 userId 속성 제거
+        // 세션에서 userId 제거
         session.removeAttribute("userId");
 
         Map<String, String> response = new HashMap<>();

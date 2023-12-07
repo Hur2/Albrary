@@ -25,6 +25,6 @@ public class UserEntity {
     private String userPassword;
 
     @Enumerated(EnumType.STRING)
-    private ProfileImageType userProfileImage; // 책 표지 이미지 (base64) -> gpt로부터 받아옴
+    private ProfileImageType userProfileImage; // 프로필 이미지 : 0 1 2 3 4
 }
 

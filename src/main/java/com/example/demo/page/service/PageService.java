@@ -30,7 +30,7 @@ public class PageService {
         return pageRepository.findAll();
     }
 
-    public List<PageEntity> getPagesByBookId(Long bookId) { // bookId로 모든 페이지 반환
+    public List<PageEntity> getPagesByBookId(Long bookId) { // bookId로 모든 페이지 리턴
         List<PageEntity> pages = pageRepository.findByBookId(bookId);
         if (pages.isEmpty()) {
             throw new EntityNotFoundException("값을 찾을 수 없습니다. 존재하지 않는 book id : " + bookId);

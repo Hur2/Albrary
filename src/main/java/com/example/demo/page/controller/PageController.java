@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/page")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://13.124.203.82")
 public class PageController {
 
     private final PageService pageService;

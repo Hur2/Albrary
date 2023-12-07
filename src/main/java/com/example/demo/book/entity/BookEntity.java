@@ -32,7 +32,7 @@ public class BookEntity {
     @Column(length = 20, nullable = false) // 책제목 -> gpt로부터 받아옴
     private String author;
 
-    @Column
+    @Column //조회수
     private int viewCount = 0;
 
     //@Column(length = 50, nullable = false) // 필터태그 ->추후에 개발예정

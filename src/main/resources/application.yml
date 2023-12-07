@@ -6,8 +6,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: root
+    url: jdbc:mysql://testplease.c1jynxpeakt1.ap-northeast-2.rds.amazonaws.com:3306/test?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+ #   url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: rot
     password: 1q2w3e4r
   thymeleaf:
     cache: false

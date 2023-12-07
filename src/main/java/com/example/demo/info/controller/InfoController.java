@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/info")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://13.124.203.82")
 public class InfoController {
     @Autowired
     private InfoRepository infoRepository;
@@ -23,7 +23,6 @@ public class InfoController {
     @PostMapping("/add")
     public ResponseEntity<String> addInfos(@RequestBody List<InfoDTO> qaPairs) {
         try {
-            // DTO를 엔티티로 변환하여 저장
             List<InfoEntity> qaPairEntities = qaPairs.stream()
                     .map(dto -> new InfoEntity(dto.getQuestion(), dto.getAnswer()))
                     .collect(Collectors.toList());
