@@ -1,0 +1,49 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.75s ease-in-out; /* 페이드인 애니메이션 적용 */
+}
+
+.fade-out {
+  animation: fadeOut 0.75s ease-in-out forwards; /* 페이드인 애니메이션 적용 */
+}
+
+.intro-text {
+  text-align: center;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 800;
+  font-size: 64px;
+  white-space: nowrap;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.circle {
+  z-index: 0;
+  position: absolute;
+  background-color: #ffd8b1;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 1s ease-in-out, height 1s ease-in-out;
+  overflow: hidden;
+}

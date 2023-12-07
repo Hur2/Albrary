@@ -1,0 +1,169 @@
+@font-face {
+  font-family: "MaplestoryBold";
+  src: url("../../public/fonts/MaplestoryBold.ttf") format("truetype");
+}
+
+.tab-wrapper {
+  position: absolute;
+  left: calc(50% + 165px);
+  top: 70px;
+}
+
+.tab-button-delete {
+  width: 160px;
+  height: 50px;
+  border: 0px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  cursor: pointer;
+  background-color: #da6c58;
+  color: rgb(248, 248, 248);
+  margin-right: 10px;
+}
+
+.tab-button-delete:hover {
+  background-color: #c4604f;
+}
+
+.tab-button-pdf {
+  width: 160px;
+  height: 50px;
+  border: 0px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  cursor: pointer;
+  background-color: #5886da;
+  color: rgb(248, 248, 248);
+  margin-right: 10px;
+}
+
+.tab-button-pdf:hover {
+  background-color: #5078c4;
+}
+
+.tab-button-fullscreen {
+  width: 160px;
+  height: 50px;
+  border: 0px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  cursor: pointer;
+  background-color: #daa258;
+  color: rgb(248, 248, 248);
+}
+
+.tab-button-fullscreen:hover {
+  background-color: #c08f4f;
+}
+
+.content-book {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 130px;
+  width: 1331px;
+  height: 666px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.btn-prev {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: calc(50% - 90px);
+  transform: translateX(-50%);
+  top: 810px;
+  font-size: 36px;
+  font-family: "MaplestoryLight";
+  width: 100px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #a4846b;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-prev:hover {
+  background-color: #856751;
+}
+
+.btn-next {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: calc(50% + 90px);
+  transform: translateX(-50%);
+  top: 810px;
+  font-size: 36px;
+  font-family: "MaplestoryLight";
+  width: 100px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #a4846b;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-next:hover {
+  background-color: #856751;
+}
+
+.btn-superPrev {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: calc(50% - 210px);
+  transform: translateX(-50%);
+  top: 810px;
+  font-size: 36px;
+  font-family: "MaplestoryLight";
+  width: 100px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #a4846b;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-superPrev:hover {
+  background-color: #856751;
+}
+
+.btn-superNext {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: calc(50% + 210px);
+  transform: translateX(-50%);
+  top: 810px;
+  font-size: 36px;
+  font-family: "MaplestoryLight";
+  width: 100px;
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #a4846b;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.btn-superNext:hover {
+  background-color: #856751;
+}
