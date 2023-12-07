@@ -40,17 +40,19 @@ const Signup = () => {
     }
 
     try {
-      const response = await axios.post("http://13.124.203.82:8082/registration", {
-        userName,
-        userId,
-        userPassword,
-        userProfileImage,
-        withCredentials:true
-      });
+      const response = await axios.post(
+        "http://13.124.203.82:8082/registration",
+        {
+          userName,
+          userId,
+          userPassword,
+          userProfileImage,
+          withCredentials: true,
+        }
+      );
       alert("회원가입에 성공했습니다.");
     } catch (error) {
       console.error("회원가입 요청 실패", error);
-      // 에러 처리 로직 구현
     }
   };
 

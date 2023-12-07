@@ -128,13 +128,11 @@ function MakeText({ onPhaseChange }) {
 
   const handleAnswerClick = (answer) => {
     // 다음 질문으로 이동
-    // 개발 사항: answer을 GPT API에 전달
     const nextQuestionIndex = currentQuestionIndex + 1;
 
     if (nextQuestionIndex < totalQuestions) {
       setCurrentQuestionIndex(nextQuestionIndex);
     } else {
-      // 질문 종료 -> 그림 선택 페이즈로 넘어가기
       onPhaseChange(3);
     }
 

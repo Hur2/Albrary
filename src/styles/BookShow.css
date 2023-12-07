@@ -167,22 +167,3 @@
 .btn-superNext:hover {
   background-color: #856751;
 }
-
-/* 프로그레스 바 스타일 */
-.progress-bar {
-  position: absolute;
-  left: 50%;
-  top: 120px;
-  transform: translateX(-50%);
-  width: 1024px;
-  text-align: center;
-  font-size: 18px;
-  background-color: #a69f93;
-}
-
-.progress {
-  height: 20px;
-  background-color: #eeb414; /* 프로그레스 바 색상 */
-  width: 0; /* 초기 너비 0으로 설정 */
-  transition: width 0.5s; /* 너비 변경 애니메이션 설정 */
-}
