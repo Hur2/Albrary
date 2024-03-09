@@ -99,4 +99,12 @@ To start the backend server, follow these steps:
 
 The backend server should now be up and running, handling requests from the frontend and interacting with the ML server.
 
-Feel free to modify or expand this README as needed to better suit your project's requirements.
+## Menual
+<img src="./docs/proposal/AIbrary 매뉴얼_pages-to-jpg-0002.jpg">
+<img src="./docs/proposal/AIbrary 매뉴얼_pages-to-jpg-0003.jpg">
+<img src="./docs/proposal/AIbrary 매뉴얼_pages-to-jpg-0004.jpg">
+<img src="./docs/proposal/AIbrary 매뉴얼_pages-to-jpg-0005.jpg">
+<img src="./docs/proposal/AIbrary 매뉴얼_pages-to-jpg-0006.jpg">
+<img src="./docs/proposal/AIbrary 매뉴얼_pages-to-jpg-0007.jpg">
+<img src="./docs/proposal/AIbrary 매뉴얼_pages-to-jpg-0008.jpg">
+
